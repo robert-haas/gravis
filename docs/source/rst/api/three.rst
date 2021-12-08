@@ -1,0 +1,4 @@
+three
+-----
+
+.. autofunction:: gravis.three

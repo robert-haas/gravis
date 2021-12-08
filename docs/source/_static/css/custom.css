@@ -1,0 +1,29 @@
+.wy-nav-content {
+  max-width: 92%;
+}
+.wy-side-nav-search, .wy-nav-top, .wy-dropdown {
+  background: #00864b;
+}
+.wy-nav-side {
+  background: #343131;
+}
+.rst-content .section ol {
+  margin-bottom: 8px;
+}
+a {
+  color: #b81118;
+}
+.rst-content code.literal {
+  color: #777;
+  font-weight: normal !important;
+  border: solid 0px !important;
+  padding: 1px;
+  font-size: 85%;
+}
+.rst-content code.xref {
+  color: #00864b;
+  font-weight: bold !important;
+}
+.rst-content code.xref:hover {
+  color: #3091d1;
+}

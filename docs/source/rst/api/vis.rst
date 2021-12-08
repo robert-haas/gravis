@@ -1,0 +1,4 @@
+vis
+---
+
+.. autofunction:: gravis.vis

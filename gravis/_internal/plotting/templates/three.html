@@ -1,0 +1,3516 @@
+§PREFIX§
+  <style>
+    /* Main divisions */
+    #§RANDOM_ID§-main-div {
+      line-height: normal;
+      box-sizing: content-box;
+      padding: 3px;
+      background-color: white;
+    }
+    #§RANDOM_ID§-left-div {
+      float: left;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    #§RANDOM_ID§-right-div {
+      float: left;
+      height: 100%;
+      display: none;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    #§RANDOM_ID§-right-inner-div {
+      padding-left: 5px;
+      padding-right: 2px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100%;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+
+    /* Graph and details (contained in left-inner-div) */
+    #§RANDOM_ID§-graph-div {
+      overflow: hidden;
+      resize: vertical;
+      position: relative;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+      display: none;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    #§RANDOM_ID§-details-div {
+      overflow: auto;
+      resize: vertical;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+      display: none;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    #§RANDOM_ID§-details-head {
+      user-select: none;
+      padding-left: 4px !important;
+      padding-top: 4px !important;
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: gray;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    #§RANDOM_ID§-details-body {
+      padding: 10px;
+      padding-top: 6px;
+      font-size: 10px;
+      font-family: "Lucida Console", Monaco, monospace;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+
+    /* Control menu (contained in right-inner-div) */
+    .§RANDOM_ID§-menu-item-head {
+      font-size: 11px;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: black;
+      cursor: pointer;
+      padding-left: 5px;
+      padding-right: 0px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    .§RANDOM_ID§-menu-item-body {
+      margin-left: 5px;
+      margin-bottom: 10px;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    .§RANDOM_ID§-menu-subitem-head {
+      font-size: 9px;
+      font-family: "Lucida Console", Monaco, monospace;
+      font-weight: 600;
+      color: #006429;
+      cursor: default;
+      margin-bottom: 2px;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    .§RANDOM_ID§-menu-subitem-body {
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      margin-left: 7px;
+      margin-bottom: 5px;
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    .§RANDOM_ID§-labeled-input {
+      all: initial;
+      display: flex;
+      align-items: center;
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+    .§RANDOM_ID§-label {
+      all: initial;
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      font-style: italic;
+      cursor: pointer;
+    }
+    .§RANDOM_ID§-slider {
+      width: 100%;
+      margin-bottom: 2px;
+    }
+    .§RANDOM_ID§-slider::-moz-focus-outer {
+      border: 0;
+    }
+    .§RANDOM_ID§-slider-text-left {
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      font-style: italic;
+      color: black;
+      float: left;
+      margin-top: 2px;
+    }
+    .§RANDOM_ID§-slider-text-right {
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: black;
+      float: right;
+    }
+    .§RANDOM_ID§-checkbox {
+      margin-left: 0px !important;
+      margin-right: 4px !important;
+      margin-top: 2px !important;
+      margin-bottom: 2px !important;
+      padding: 0px !important;
+    }
+    .§RANDOM_ID§-select {
+      cursor: pointer;
+      outline: none;
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: black;
+      background-color: #f5f5f5;
+      width: 100%;
+      padding-top: 4px !important;
+      padding-bottom: 4px !important;
+      padding-left: 5px;
+      padding-right: 10px;
+      margin-right: 5px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      border-radius: 4px;
+      border: 1.2px solid #bbb;
+      box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOTIuNCIgaGVpZ2h0PSIyOTIuNCI+PHBhdGggZmlsbD0iIzAwMDAwMCIgZD0iTSAtNS4yMDY0NjJlLTYsNjQuNTcyNjU2IDI5Mi4zOTk5OSw2NC41NzI2NTQgMTQ2LjE5OTk3LDIzMy42Mjg0NyAtNS4yMDY0NjJlLTYsNjQuNTcyNjU2Ii8+PC9zdmc+Cg==');
+      background-repeat: no-repeat;
+      background-position: right 4px top 50%;
+      background-size: 6px;
+    }
+    @-moz-document url-prefix() {
+      /* Dirty hack to remove dotted border on focus */
+      .§RANDOM_ID§-select {
+        color: transparent !important;
+        text-shadow: 0 0 0 black !important;
+      }
+    }
+    .§RANDOM_ID§-select:after {
+      cursor: pointer;
+    }
+    .§RANDOM_ID§-button {
+      cursor: pointer;
+      outline: none;
+      font-size: 8px;
+      font-family: "Lucida Console", Monaco, monospace;
+      color: black;
+      background-color: #f2f2f2;
+      padding-top: 4px !important;
+      padding-bottom: 4px !important;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      border-radius: 4px;
+      border: 1.2px solid #bbb;
+      box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+    }
+    .§RANDOM_ID§-button:hover {
+      border: 1.2px solid #999;
+      background-color: #f2f2f2;
+    }
+    .§RANDOM_ID§-button:active {
+      background-color: #ddd;
+    }
+    .§RANDOM_ID§-button::-moz-focus-inner {
+      border: 0;
+    }
+    /* Hidden menu items */
+    #§RANDOM_ID§-graph-select-div {
+      display: none;
+    }
+    #§RANDOM_ID§-node-size-norm-div {
+      display: none;
+    }
+    #§RANDOM_ID§-edge-size-norm-div {
+      display: none;
+    }
+
+    /* Graph */
+    #§RANDOM_ID§-tooltip-div {
+      font-size: 10px;
+      font-family: "Lucida Console", Monaco, monospace;
+      z-index: 42001;
+      opacity: 0;
+      visibility: hidden;
+      position: absolute !important;
+      max-width: 40%;
+      padding: 5px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: black;
+      background-color: white;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    #§RANDOM_ID§-menu-toggle-button, #§RANDOM_ID§-details-toggle-button, #§RANDOM_ID§-progress-container {
+      font-size: 14px;
+      font-family: "Lucida Console", Monaco, monospace;
+      z-index: 42000;
+      cursor: pointer;
+      position: absolute;
+      background-color: white;
+      border-radius: 4px;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+      line-height: normal;
+      box-sizing: content-box;
+    }
+    #§RANDOM_ID§-menu-toggle-button {
+      top: 0;
+      right: 0;
+      padding-left: 6px;
+      padding-right: 6px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border-top: 0px;
+      border-right: 0px;
+      border-bottom: 1px solid #ccc;
+      border-left: 1px solid #ccc;
+    }
+    #§RANDOM_ID§-details-toggle-button {
+      bottom: 0;
+      left: 0;
+      padding-left: 19px;
+      padding-right: 19px;
+      padding-top: 0.5px;
+      padding-bottom: 2px;
+      border-top: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      border-bottom: 0px;
+      border-left: 0px;
+    }
+    #§RANDOM_ID§-progress-container {
+      font-size: 10px;
+      text-align: center;
+      top: 46%;
+      left: 15%;
+      width: 70%;
+      padding: 8px;
+      border: none;
+      box-shadow: none;
+    }
+
+    /* Details */
+    #§RANDOM_ID§-details-user-provided {
+      margin-top: 3px;
+      padding-top: 3.5px;
+      border-top: 0.5px dashed black;
+      line-height: normal;
+      box-sizing: content-box;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    #§RANDOM_ID§-details-user-provided ul {
+      list-style-position: inside;
+      padding-left: 6px;
+    }
+  </style>
+
+  <div id="§RANDOM_ID§-main-div">
+    <div id="§RANDOM_ID§-tooltip-div"></div>
+
+    <div id="§RANDOM_ID§-left-div">
+      <div id="§RANDOM_ID§-left-inner-div">
+        <div id="§RANDOM_ID§-graph-div"></div>
+        <div id="§RANDOM_ID§-details-div">
+          <div id="§RANDOM_ID§-details-head">
+            Details for selected element
+          </div>
+          <div id="§RANDOM_ID§-details-body">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="§RANDOM_ID§-right-div">
+      <div id="§RANDOM_ID§-right-inner-div">
+        <!-- Menu: General -->
+        <div class="§RANDOM_ID§-menu-item-head"
+             id="§RANDOM_ID§-general-head">
+          General
+        </div>
+        <div class="§RANDOM_ID§-menu-item-body"
+             id="§RANDOM_ID§-general-body">
+          <!-- Sub-menu: State -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              App state
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <button class="§RANDOM_ID§-button"
+                      id="§RANDOM_ID§-reset"
+                      type="button">Reset</button>
+            </div>
+          </div>
+          <!-- Sub-menu: Display mode (fullscreen or not) -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Display mode
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <button class="§RANDOM_ID§-button"
+                      id="§RANDOM_ID§-fullscreen-button"
+                      type="button">Enter full screen</button>
+            </div>
+          </div>
+          <!-- Sub-menu: Export -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Export
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <button class="§RANDOM_ID§-button"
+                      id="§RANDOM_ID§-png"
+                      type="button">PNG</button>
+              <button class="§RANDOM_ID§-button"
+                      id="§RANDOM_ID§-jpg"
+                      type="button">JPG</button>
+            </div>
+          </div>
+        </div>
+        <!-- Menu: Data -->
+        <div class="§RANDOM_ID§-menu-item-head"
+             id="§RANDOM_ID§-data-head">
+          Data selection
+        </div>
+        <div class="§RANDOM_ID§-menu-item-body"
+             id="§RANDOM_ID§-data-body">
+          <!-- Sub-menu: Graph (only shown if multiple graphs in data) -->
+          <div id="§RANDOM_ID§-graph-select-div">
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Graph
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <select class="§RANDOM_ID§-select"
+                      id="§RANDOM_ID§-graph-select"></select>
+            </div>
+          </div>
+          <!-- Sub-menu: Node label text -->
+          <div id="§RANDOM_ID§-node-label-data-source-div">
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Node label text
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <select class="§RANDOM_ID§-select"
+                      id="§RANDOM_ID§-node-label-data-source-select"></select>
+            </div>
+          </div>
+          <!-- Sub-menu: Node size -->
+          <div class="§RANDOM_ID§-menu-subitem-head">
+            Node size
+          </div>
+          <div class="§RANDOM_ID§-menu-subitem-body">
+            <div>
+              <select class="§RANDOM_ID§-select"
+                      id="§RANDOM_ID§-node-size-data-source-select"></select>
+            </div>
+            <div class="§RANDOM_ID§-labeled-input">
+              <input class="§RANDOM_ID§-checkbox"
+                     id="§RANDOM_ID§-node-size-normalization-checkbox"
+                     type="checkbox">
+              <label class="§RANDOM_ID§-label"
+                     for="§RANDOM_ID§-node-size-normalization-checkbox">Normalize</label>
+            </div>
+            <div id="§RANDOM_ID§-node-size-norm-div">
+              <div>
+                <span class="§RANDOM_ID§-slider-text-left">Minimum</span>
+                <span class="§RANDOM_ID§-slider-text-right"
+                      id="§RANDOM_ID§-node-size-normalization-min-text"></span>
+                <input class="§RANDOM_ID§-slider"
+                       id="§RANDOM_ID§-node-size-normalization-min-slider"
+                       type="range" min="0.01" max="300.0" step="0.01">
+              </div>
+              <div>
+                <span class="§RANDOM_ID§-slider-text-left">Maximum</span>
+                <span class="§RANDOM_ID§-slider-text-right"
+                      id="§RANDOM_ID§-node-size-normalization-max-text"></span>
+                <input class="§RANDOM_ID§-slider"
+                       id="§RANDOM_ID§-node-size-normalization-max-slider"
+                       type="range" min="0.01" max="300.0" step="0.01">
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: Edge size -->
+          <div class="§RANDOM_ID§-menu-subitem-head">
+            Edge size
+          </div>
+          <div class="§RANDOM_ID§-menu-subitem-body">
+            <div>
+              <select class="§RANDOM_ID§-select"
+                      id="§RANDOM_ID§-edge-size-data-source-select"></select>
+            </div>
+            <div class="§RANDOM_ID§-labeled-input">
+              <input class="§RANDOM_ID§-checkbox"
+                     id="§RANDOM_ID§-edge-size-normalization-checkbox"
+                     type="checkbox">
+              <label class="§RANDOM_ID§-label"
+                     for="§RANDOM_ID§-edge-size-normalization-checkbox">Normalize</label>
+            </div>
+            <div id="§RANDOM_ID§-edge-size-norm-div">
+              <div>
+                <span class="§RANDOM_ID§-slider-text-left">Minimum</span>
+                <span class="§RANDOM_ID§-slider-text-right"
+                      id="§RANDOM_ID§-edge-size-normalization-min-text"></span>
+                <input class="§RANDOM_ID§-slider"
+                       id="§RANDOM_ID§-edge-size-normalization-min-slider"
+                       type="range" min="0.01" max="50.0" step="0.01">
+              </div>
+              <div>
+                <span class="§RANDOM_ID§-slider-text-left">Maximum</span>
+                <span class="§RANDOM_ID§-slider-text-right"
+                      id="§RANDOM_ID§-edge-size-normalization-max-text"></span>
+                <input class="§RANDOM_ID§-slider"
+                       id="§RANDOM_ID§-edge-size-normalization-max-slider"
+                       type="range" min="0.01" max="50.0" step="0.01">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Menu: Nodes -->
+        <div class="§RANDOM_ID§-menu-item-head"
+             id="§RANDOM_ID§-node-head">
+          Nodes
+        </div>
+        <div class="§RANDOM_ID§-menu-item-body"
+             id="§RANDOM_ID§-node-body">
+          <!-- Sub-menu: Visibility -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Visibility
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-node-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-node-checkbox">Show nodes</label>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: Size -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Size
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div>
+                <span class="§RANDOM_ID§-slider-text-left">Scaling factor</span>
+                <span class="§RANDOM_ID§-slider-text-right"
+                      id="§RANDOM_ID§-node-size-factor-text"></span>
+                <input class="§RANDOM_ID§-slider"
+                       id="§RANDOM_ID§-node-size-factor-slider"
+                       type="range" min="0.01" max="5.0" step="0.01">
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: Position -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Position
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <button class="§RANDOM_ID§-button"
+                      id="§RANDOM_ID§-node-release-button"
+                      type="button">Release fixed nodes</button>
+            </div>
+          </div>
+          <!-- Sub-menu: Drag behavior -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Drag behavior
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-node-drag-fix-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-node-drag-fix-checkbox">Fix node position</label>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: Hover behavior -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Hover behavior
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-node-hover-tooltip-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-node-hover-tooltip-checkbox">Show tooltips (if provided)</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Menu: Node images -->
+        <div id="§RANDOM_ID§-node-image-meta-control">
+          <div class="§RANDOM_ID§-menu-item-head"
+               id="§RANDOM_ID§-node-image-head">
+            Node images
+          </div>
+          <div class="§RANDOM_ID§-menu-item-body"
+               id="§RANDOM_ID§-node-image-body">
+            <!-- Sub-menu: Visibility -->
+            <div>
+              <div class="§RANDOM_ID§-menu-subitem-head">
+                Visibility
+              </div>
+              <div class="§RANDOM_ID§-menu-subitem-body">
+                <div class="§RANDOM_ID§-labeled-input">
+                  <input class="§RANDOM_ID§-checkbox"
+                         id="§RANDOM_ID§-node-image-checkbox"
+                         type="checkbox">
+                  <label class="§RANDOM_ID§-label"
+                         for="§RANDOM_ID§-node-image-checkbox">Show node images</label>
+                </div>
+              </div>
+            </div>
+            <!-- Sub-menu: Size -->
+            <div>
+              <div class="§RANDOM_ID§-menu-subitem-head">
+                Size
+              </div>
+              <div class="§RANDOM_ID§-menu-subitem-body">
+                <span class="§RANDOM_ID§-slider-text-left">Scaling factor</span>
+                <span class="§RANDOM_ID§-slider-text-right"
+                      id="§RANDOM_ID§-node-image-size-factor-text"></span>
+                <input class="§RANDOM_ID§-slider"
+                       id="§RANDOM_ID§-node-image-size-factor-slider"
+                       type="range" min="0.01" max="5.0" step="0.01">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Menu: Node labels -->
+        <div class="§RANDOM_ID§-menu-item-head"
+             id="§RANDOM_ID§-node-label-head">
+          Node labels
+        </div>
+        <div class="§RANDOM_ID§-menu-item-body"
+             id="§RANDOM_ID§-node-label-body">
+          <!-- Sub-menu: Visibility -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Visibility
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-node-label-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-node-label-checkbox">Show node labels</label>
+              </div>
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-node-label-border-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-node-label-border-checkbox">Show borders</label>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: Size -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Size
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <span class="§RANDOM_ID§-slider-text-left">Scaling factor</span>
+              <span class="§RANDOM_ID§-slider-text-right"
+                    id="§RANDOM_ID§-node-label-size-factor-text"></span>
+              <input class="§RANDOM_ID§-slider"
+                     id="§RANDOM_ID§-node-label-size-factor-slider"
+                     type="range" min="0.01" max="5.0" step="0.01">
+            </div>
+          </div>
+        </div>
+        <!-- Menu: Edges -->
+        <div class="§RANDOM_ID§-menu-item-head"
+             id="§RANDOM_ID§-edge-head">
+          Edges
+        </div>
+        <div class="§RANDOM_ID§-menu-item-body"
+             id="§RANDOM_ID§-edge-body">
+          <!-- Sub-menu: Visibility -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Visibility
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-edge-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-edge-checkbox">Show edges</label>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: Size -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Size
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <span class="§RANDOM_ID§-slider-text-left">Scaling factor</span>
+              <span class="§RANDOM_ID§-slider-text-right"
+                    id="§RANDOM_ID§-edge-size-factor-text"></span>
+              <input class="§RANDOM_ID§-slider"
+                     id="§RANDOM_ID§-edge-size-factor-slider"
+                     type="range" min="0.01" max="5.0" step="0.01">
+            </div>
+          </div>
+          <!-- Sub-menu: Form -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Form
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <span class="§RANDOM_ID§-slider-text-left">Curvature</span>
+              <span class="§RANDOM_ID§-slider-text-right"
+                    id="§RANDOM_ID§-edge-curvature-text"></span>
+              <input class="§RANDOM_ID§-slider"
+                     id="§RANDOM_ID§-edge-curvature-slider"
+                     type="range" min="-1.2" max="1.2" step="0.02">
+            </div>
+          </div>
+          <!-- Sub-menu: Hover behavior -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Hover behavior
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-edge-hover-tooltip-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-edge-hover-tooltip-checkbox">Show tooltips (if provided)</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Menu: Layout algorithm -->
+        <div class="§RANDOM_ID§-menu-item-head"
+             id="§RANDOM_ID§-layout-algorithm-head">
+          Layout algorithm
+        </div>
+        <div class="§RANDOM_ID§-menu-item-body"
+             id="§RANDOM_ID§-layout-algorithm-body">
+
+          <!-- Sub-menu: Simulation -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Simulation
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-simulation-active-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-simulation-active-checkbox">Active</label>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: Many-body force -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Many-body force
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-many-body-force-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-many-body-force-checkbox">On</label>
+              </div>
+              <div id="§RANDOM_ID§-many-body-force-div">
+                <div>
+                  <span class="§RANDOM_ID§-slider-text-left">Strength</span>
+                  <span class="§RANDOM_ID§-slider-text-right"
+                        id="§RANDOM_ID§-many-body-force-strength-text"></span>
+                  <input class="§RANDOM_ID§-slider"
+                         id="§RANDOM_ID§-many-body-force-strength-slider"
+                         type="range" min="-2000.0" max="200.0" step="0.01"
+                         style="direction:rtl;">
+                </div>
+                <div>
+                  <span class="§RANDOM_ID§-slider-text-left">Theta</span>
+                  <span class="§RANDOM_ID§-slider-text-right"
+                        id="§RANDOM_ID§-many-body-force-theta-text"></span>
+                  <input class="§RANDOM_ID§-slider"
+                         id="§RANDOM_ID§-many-body-force-theta-slider"
+                         type="range" min="0.01" max="2.0" step="0.001">
+                </div>
+                <div style="margin-top: 6px;">
+                  <div class="§RANDOM_ID§-labeled-input">
+                    <input class="§RANDOM_ID§-checkbox"
+                         id="§RANDOM_ID§-many-body-force-min-distance-checkbox"
+                         type="checkbox">
+                    <label class="§RANDOM_ID§-label"
+                           for="§RANDOM_ID§-many-body-force-min-distance-checkbox">Use minimum distance</label>
+                  </div>
+                  <div id="§RANDOM_ID§-many-body-force-min-distance-div">
+                    <span class="§RANDOM_ID§-slider-text-left">Min</span>
+                    <span class="§RANDOM_ID§-slider-text-right"
+                          id="§RANDOM_ID§-many-body-force-min-distance-text"></span>
+                    <input class="§RANDOM_ID§-slider"
+                           id="§RANDOM_ID§-many-body-force-min-distance-slider"
+                           type="range" min="0.01" max="10000.0" step="0.01">
+                  </div>
+                </div>
+                <div style="margin-top: 6px;">
+                  <div class="§RANDOM_ID§-labeled-input">
+                    <input class="§RANDOM_ID§-checkbox"
+                         id="§RANDOM_ID§-many-body-force-max-distance-checkbox"
+                         type="checkbox">
+                    <label class="§RANDOM_ID§-label"
+                           for="§RANDOM_ID§-many-body-force-max-distance-checkbox">Use maximum distance</label>
+                  </div>
+                  <div id="§RANDOM_ID§-many-body-force-max-distance-div">
+                    <span class="§RANDOM_ID§-slider-text-left">Max</span>
+                    <span class="§RANDOM_ID§-slider-text-right"
+                          id="§RANDOM_ID§-many-body-force-max-distance-text"></span>
+                    <input class="§RANDOM_ID§-slider"
+                           id="§RANDOM_ID§-many-body-force-max-distance-slider"
+                           type="range" min="0.01" max="10000.0" step="0.01">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: Links force -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Links force
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-links-force-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-links-force-checkbox">On</label>
+                </label>
+              </div>
+              <div id="§RANDOM_ID§-links-force-div">
+                <div>
+                  <span class="§RANDOM_ID§-slider-text-left">Distance</span>
+                  <span class="§RANDOM_ID§-slider-text-right"
+                        id="§RANDOM_ID§-links-force-distance-text"></span>
+                  <input class="§RANDOM_ID§-slider"
+                         id="§RANDOM_ID§-links-force-distance-slider"
+                         type="range" min="0.01" max="1000.0" step="0.01">
+                </div>
+                <div>
+                  <span class="§RANDOM_ID§-slider-text-left">Strength</span>
+                  <span class="§RANDOM_ID§-slider-text-right"
+                        id="§RANDOM_ID§-links-force-strength-text"></span>
+                  <input class="§RANDOM_ID§-slider"
+                         id="§RANDOM_ID§-links-force-strength-slider"
+                         type="range" min="0.01" max="1.0" step="0.001">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: x-positioning force -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              x-positioning force
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-x-positioning-force-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-x-positioning-force-checkbox">On</label>
+              </div>
+              <div id="§RANDOM_ID§-x-positioning-force-div">
+                <div>
+                  <span class="§RANDOM_ID§-slider-text-left">Strength</span>
+                  <span class="§RANDOM_ID§-slider-text-right"
+                        id="§RANDOM_ID§-x-positioning-force-strength-text"></span>
+                  <input class="§RANDOM_ID§-slider"
+                         id="§RANDOM_ID§-x-positioning-force-strength-slider"
+                         type="range" min="0.01" max="1.0" step="0.001">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: y-positioning force -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              y-positioning force
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-y-positioning-force-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-y-positioning-force-checkbox">On</label>
+              </div>
+              <div id="§RANDOM_ID§-y-positioning-force-div">
+                <div>
+                  <span class="§RANDOM_ID§-slider-text-left">Strength</span>
+                  <span class="§RANDOM_ID§-slider-text-right"
+                        id="§RANDOM_ID§-y-positioning-force-strength-text"></span>
+                  <input class="§RANDOM_ID§-slider"
+                         id="§RANDOM_ID§-y-positioning-force-strength-slider"
+                         type="range" min="0.01" max="1.0" step="0.001">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: z-positioning force -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              z-positioning force
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-z-positioning-force-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-z-positioning-force-checkbox">On</label>
+              </div>
+              <div id="§RANDOM_ID§-z-positioning-force-div">
+                <div>
+                  <span class="§RANDOM_ID§-slider-text-left">Strength</span>
+                  <span class="§RANDOM_ID§-slider-text-right"
+                        id="§RANDOM_ID§-z-positioning-force-strength-text"></span>
+                  <input class="§RANDOM_ID§-slider"
+                         id="§RANDOM_ID§-z-positioning-force-strength-slider"
+                         type="range" min="0.01" max="1.0" step="0.001">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Sub-menu: Centering force -->
+          <div>
+            <div class="§RANDOM_ID§-menu-subitem-head">
+              Centering force
+            </div>
+            <div class="§RANDOM_ID§-menu-subitem-body">
+              <div class="§RANDOM_ID§-labeled-input">
+                <input class="§RANDOM_ID§-checkbox"
+                       id="§RANDOM_ID§-centering-force-checkbox"
+                       type="checkbox">
+                <label class="§RANDOM_ID§-label"
+                       for="§RANDOM_ID§-centering-force-checkbox">On</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script charset="utf-8" type="text/javascript">
+    if(typeof(require) === "undefined"){
+      §LOAD_REQUIRE§
+    }
+    §DEFINE_THREE§
+    §DEFINE_3D_FORCE_GRAPH§
+
+    require(["gravis-3d-force-graph", "gravis-three"], function(ForceGraph3D, THREE){
+      // Strict mode: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Strict_mode
+      "use strict";
+
+      const state = {
+        threeObjects:{
+          // Manual tracking and release of resources used by Three.js
+          // https://threejs.org/docs/#manual/en/introduction/How-to-dispose-of-objects
+          geometries: {},
+          materials: {},
+          textures: {},
+          renderers: {},
+          renderTargets: {},
+          trackGeometry(id, geometry){
+            if(typeof(this.geometries[id]) !== "undefined"){
+              this.removeGeometry(id);
+            }
+            this.geometries[id] = geometry;
+          },
+          removeGeometry(id){
+            this.geometries[id].dispose();
+            delete this.geometries[id];
+          },
+          trackMaterial(id, material){
+            if(typeof(this.materials[id]) !== "undefined"){
+              this.removeMaterial(id);
+            }
+            this.materials[id] = material;
+          },
+          removeMaterial(id){
+            this.materials[id].dispose();
+            delete this.materials[id];
+          },
+          trackTexture(id, texture){
+            if(typeof(this.textures[id]) !== "undefined"){
+              this.removeTexture(id);
+            }
+            this.textures[id] = texture;
+          },
+          removeTexture(id){
+            this.textures[id].dispose();
+            delete this.textures[id];
+          },
+          trackRenderer(id, renderer){
+            if(typeof(this.renderers[id]) !== "undefined"){
+              this.removeRenderer(id);
+            }
+            this.renderers[id] = renderer;
+          },
+          removeRenderer(id){
+            this.renderers[id].dispose();
+            delete this.renderers[id];
+          },
+          trackRenderTarget(id, renderTarget){
+            if(typeof(this.renderTargets[id]) !== "undefined"){
+              this.removeRenderTarget(id);
+            }
+            this.renderTargets[id] = renderTarget;
+          },
+          removeRenderTarget(id){
+            if(this.renderTargets[id] !== null){
+              this.renderTargets[id].dispose();
+            }
+            delete this.renderTargets[id];
+          },
+          disposeAll(){
+            const objects = [this.geometries, this.materials, this.textures, this.renderers, this.renderTargets];
+            for(let i=0; i<objects.length; i++){
+              const obj = objects[i];
+              for(let key in obj){
+                if(obj.hasOwnProperty(key)){
+                  if(obj[key] !== null){
+                    obj[key].dispose();
+                  }
+                }
+              }
+            }
+          },
+        },
+        manager:{
+          // Data generation process: 1) Fetch state.rawData, 2) derive state.parsedData, 3) derive state.shownData
+
+          // 1) Fetch state.rawData
+          fetchRawDataFromTemplating(){
+            state.rawData = §DATA§;
+            // Data selection and normalization
+            state.nodeSizeDataSource = §NODE_SIZE_DATA_SOURCE§;
+            state.useNodeSizeNormalization = §USE_NODE_SIZE_NORMALIZATION§;
+            state.nodeSizeNormalizationMin = §NODE_SIZE_NORMALIZATION_MIN§;
+            state.nodeSizeNormalizationMax = §NODE_SIZE_NORMALIZATION_MAX§;
+            state.nodeLabelTextDataSource = §NODE_LABEL_DATA_SOURCE§;
+            state.edgeSizeDataSource = §EDGE_SIZE_DATA_SOURCE§;
+            state.useEdgeSizeNormalization = §USE_EDGE_SIZE_NORMALIZATION§;
+            state.edgeSizeNormalizationMin = §EDGE_SIZE_NORMALIZATION_MIN§;
+            state.edgeSizeNormalizationMax = §EDGE_SIZE_NORMALIZATION_MAX§;
+            state.edgeLabelTextDataSource = §EDGE_LABEL_DATA_SOURCE§;
+            // Containers
+            state.graphContainerHeight = §GRAPH_HEIGHT§;
+            state.detailsContainerHeight = §DETAILS_HEIGHT§;
+            state.showDetails = §SHOW_DETAILS§,
+            state.showDetailsToggleButton = §SHOW_DETAILS_TOGGLE_BUTTON§,
+            state.showMenu = §SHOW_MENU§,
+            state.showMenuToggleButton = §SHOW_MENU_TOGGLE_BUTTON§,
+            // Nodes
+            state.showNodes = §SHOW_NODE§;
+            state.nodeSizeFactor = §NODE_SIZE_FACTOR§;
+            state.nodeDragFix = §NODE_DRAG_FIX§;
+            state.nodeHoverNeighborhood = §NODE_HOVER_NEIGHBORHOOD§;
+            state.nodeHoverTooltip = §NODE_HOVER_TOOLTIP§;
+            state.showNodeImages = §SHOW_NODE_IMAGE§;
+            state.nodeImageSizeFactor = §NODE_IMAGE_SIZE_FACTOR§;
+            state.showNodeLabels = §SHOW_NODE_LABEL§;
+            state.showNodeLabelBorders = §SHOW_NODE_LABEL_BORDER§;
+            state.nodeLabelSizeFactor = §NODE_LABEL_SIZE_FACTOR§;
+            state.nodeLabelRotation = §NODE_LABEL_ROTATION§;
+            state.nodeLabelFont = §NODE_LABEL_FONT§;
+            // Edges
+            state.showEdges = §SHOW_EDGE§;
+            state.edgeSizeFactor = §EDGE_SIZE_FACTOR§;
+            state.edgeCurvature = §EDGE_CURVATURE§;
+            state.edgeHoverTooltip = §EDGE_HOVER_TOOLTIP§,
+            state.showEdgeLabels = §SHOW_EDGE_LABEL§;
+            state.showEdgeLabelBorders = §SHOW_EDGE_LABEL_BORDER§;
+            state.edgeLabelSizeFactor = §EDGE_LABEL_SIZE_FACTOR§;
+            state.edgeLabelRotation = §EDGE_LABEL_ROTATION§;
+            state.edgeLabelFont = §EDGE_LABEL_FONT§;
+            // Layout algorithm
+            state.layoutAlgorithmActive = §LAYOUT_ALGORITHM_ACTIVE§;
+            state.useManyBodyForce = §USE_MANY_BODY_FORCE§;
+            state.manyBodyForceStrength = §MANY_BODY_FORCE_STRENGTH§;
+            state.manyBodyForceTheta = §MANY_BODY_FORCE_THETA§;
+            state.useManyBodyForceMinDistance = §USE_MANY_BODY_FORCE_MIN_DISTANCE§;
+            state.manyBodyForceMinDistance = §MANY_BODY_FORCE_MIN_DISTANCE§;
+            state.useManyBodyForceMaxDistance = §USE_MANY_BODY_FORCE_MAX_DISTANCE§;
+            state.manyBodyForceMaxDistance = §MANY_BODY_FORCE_MAX_DISTANCE§;
+            state.useLinksForce = §USE_LINKS_FORCE§;
+            state.linksForceDistance = §LINKS_FORCE_DISTANCE§;
+            state.linksForceStrength = §LINKS_FORCE_STRENGTH§;
+            state.useXPositioningForce = §USE_X_POSITIONING_FORCE§;
+            state.xPositioningForceStrength = §X_POSITIONING_FORCE_STRENGTH§;
+            state.useYPositioningForce = §USE_Y_POSITIONING_FORCE§;
+            state.yPositioningForceStrength = §Y_POSITIONING_FORCE_STRENGTH§;
+            state.useZPositioningForce = §USE_Z_POSITIONING_FORCE§;
+            state.zPositioningForceStrength = §Z_POSITIONING_FORCE_STRENGTH§;
+            state.useCenteringForce = §USE_CENTERING_FORCE§;
+            // Other
+            state.initZoomFactor = §ZOOM_FACTOR§;
+            state.largeGraphThreshold = §LARGE_GRAPH_THRESHOLD§;
+          },
+
+          // 2) Derive state.parsedData from state.givenData
+          rawDataParser:{
+            getBool(obj, prop, def){
+              try{
+                const value = obj[prop];
+                if(value == "true" || value == "True"){
+                  value = true;
+                } else if(value == "false" || value == "False"){
+                  value = false;
+                }
+                if(value !== true && value !== false){
+                  throw "Invalid value. Not a bool.";
+                }
+                return value;
+              } catch(e){
+                return def;
+              }
+              return def
+            },
+
+            getString(obj, prop, def) {
+              try{
+                const value = String(obj[prop]);
+                if(value === "undefined"){
+                  throw "Invalid value. Not a proper string.";
+                }
+                return value;
+              } catch(e){
+                return def;
+              }
+              return def;
+            },
+
+            getArrayLengthOrZero(array){
+              try{
+                const value = parseInt(array.length);
+                if(!((value + 1) > 0)){
+                  throw "Invalid value. Not a proper length.";
+                }
+                return value;
+              } catch(e){
+                return 0;
+              }
+            },
+
+            getObjectLengthOrZero(obj){
+              try{
+                const value = Object.keys(obj).length;
+                if(!((value + 1) > 0)){
+                  throw "Invalid value. Not a proper length.";
+                }
+                return value;
+              } catch(e){
+                return 0;
+              }
+            },
+
+            createUniqueEdgeId(sourceId, targetId, knownEdgeIds){
+              let newEdgeIdBase = "(" + sourceId + ", " + targetId + ")",
+                newEdgeId = newEdgeIdBase,
+                multiEdgeCounter = 1;
+              for(let i=1; knownEdgeIds.has(newEdgeId); i++){
+                newEdgeId = newEdgeIdBase + "_" + String(i);
+                multiEdgeCounter += 1;
+              }
+              knownEdgeIds.add(newEdgeId);
+              return {"id": newEdgeId, "count": multiEdgeCounter}
+            },
+          },
+
+          rawMetadataParser:{
+            getString(obj, prop, def){
+              try{
+                const value = String(obj.metadata[prop]);
+                if(value === "undefined"){
+                  throw "Invalid value. Not a proper string.";
+                }
+                return value;
+              } catch(e){
+                return def;
+              }
+            },
+            getColor(obj, prop, def){
+              function isBodyidColor(strColor) {
+                const sty = new Option().style;
+                sty.color = strColor;
+                return sty.color !== "";
+              }
+              try{
+                const value = obj.metadata[prop];
+                if(!isBodyidColor(value)){
+                  throw "Invalid value. Not a color."
+                }
+                return value;
+              } catch(e){
+                return def;
+              }
+            },
+            getFiniteNumber(obj, prop, def){
+              try{
+                const value = parseFloat(obj.metadata[prop]);
+                if(!isFinite(value) || value === null){
+                  throw "Invalid value. Not a finite number."
+                }
+                return value;
+              } catch(e){
+                return def;
+              }
+            },
+            getFiniteNumberOrNull(obj, prop, def){
+              try{
+                const value = parseFloat(obj.metadata[prop]);
+                if(!isFinite(value)){  // Note: isFinite(null) gives true
+                  throw "Invalid value. Not a finite number or null."
+                }
+                return value;
+              } catch(e){
+                return def;
+              }
+            },
+            getFinitePositiveNumber(obj, prop, def){
+              try{
+                const value = parseFloat(obj.metadata[prop]);
+                if(!isFinite(value) || value === null || value < 0.0){
+                  throw "Invalid value. Not a finite positive number."
+                }
+                return value;
+              } catch(e){
+                return def;
+              }
+            },
+            collectOtherMetadata(sourceObject, targetObject, definedMetadata){
+              if(typeof(sourceObject) !== "undefined" && typeof(sourceObject.metadata) !== "undefined"){
+                const properties = Object.keys(sourceObject.metadata);
+                for(let i=0; i<properties.length; i++){
+                  const property = properties[i];
+                  if(!definedMetadata.has(property)){
+                    targetObject[property] = sourceObject.metadata[property];
+                  }
+                }
+              }
+            },
+          },
+
+          propertyClassifier:{
+            numeric: null,
+            nonNumeric: null,
+            init(){
+              this.numeric = new Set(),
+              this.nonNumeric = new Set();
+            },
+            isNumeric(d){
+              return d === null || typeof(d) === "undefined" || String(parseFloat(d)) === String(d);
+            },
+            inspect(object, property){
+              const value = object[property];
+              if(!this.nonNumeric.has(property)){
+                if(this.isNumeric(value)){
+                  this.numeric.add(property);
+                } else{
+                  this.nonNumeric.add(property);
+                  this.numeric.delete(property);
+                }
+              }
+            }
+          },
+
+          replaceStringVariables(givenString, givenItem, variables){
+            let newString = givenString;
+            for(let i=0; i<variables.length; i++){
+              let variable = variables[i],
+                variableText = "$" + variable;
+              if(variable === "x"){
+                variable = "fx";
+              } else if (variable === "y"){
+                variable = "fy";
+              } else if (variable === "z"){
+                variable = "fz";
+              }
+              let insertedText = String(givenItem[variable]);
+              if(insertedText === "undefined"){
+                insertedText = "";
+              }
+              newString = newString.replace(variableText, insertedText);
+            }
+            return newString;
+          },
+
+          parseGeneral(givenData, parsedData){
+            parsedData.general = {
+              // General
+              directed: state.manager.rawDataParser.getBool(givenData, "directed", true),
+              label: state.manager.rawDataParser.getString(givenData, "label", ""),
+              background_color: state.manager.rawMetadataParser.getColor(givenData, "background_color", "white"),
+              arrow_color: state.manager.rawMetadataParser.getColor(givenData, "arrow_color", "black"),
+              arrow_size: state.manager.rawMetadataParser.getFinitePositiveNumber(givenData, "arrow_size", 10.0),
+              // Nodes
+              node_color: state.manager.rawMetadataParser.getColor(givenData, "node_color", "black"),
+              node_opacity: state.manager.rawMetadataParser.getFinitePositiveNumber(givenData, "node_opacity", 1.0),
+              node_size: state.manager.rawMetadataParser.getFinitePositiveNumber(givenData, "node_size", 10.0),
+              node_shape: state.manager.rawMetadataParser.getString(givenData, "node_shape", "circle"),
+              node_border_color: state.manager.rawMetadataParser.getColor(givenData, "node_border_color", "black"),
+              node_border_size: state.manager.rawMetadataParser.getFinitePositiveNumber(givenData, "node_border_size", 0.0),
+              node_label_color: state.manager.rawMetadataParser.getColor(givenData, "node_label_color", "black"),
+              node_label_size: state.manager.rawMetadataParser.getFinitePositiveNumber(givenData, "node_label_size", 12.0),
+              node_hover: state.manager.rawMetadataParser.getString(givenData, "node_hover", ""),
+              node_click: state.manager.rawMetadataParser.getString(givenData, "node_click", ""),
+              node_image: state.manager.rawMetadataParser.getString(givenData, "node_image", ""),
+              node_x: state.manager.rawMetadataParser.getFiniteNumberOrNull(givenData, "node_x", null),
+              node_y: state.manager.rawMetadataParser.getFiniteNumberOrNull(givenData, "node_y", null),
+              node_z: state.manager.rawMetadataParser.getFiniteNumberOrNull(givenData, "node_z", null),
+              contains_node_hover: false,
+              contains_node_click: false,
+              contains_node_image: false,
+              // Edges
+              edge_color: state.manager.rawMetadataParser.getColor(givenData, "edge_color", "black"),
+              edge_opacity: state.manager.rawMetadataParser.getFinitePositiveNumber(givenData, "edge_opacity", 1.0),
+              edge_size: state.manager.rawMetadataParser.getFinitePositiveNumber(givenData, "edge_size", 1.0),
+              edge_label_color: state.manager.rawMetadataParser.getColor(givenData, "edge_label_color", "black"),
+              edge_label_size: state.manager.rawMetadataParser.getFinitePositiveNumber(givenData, "edge_label_size", 8.0),
+              edge_hover: state.manager.rawMetadataParser.getString(givenData, "edge_hover", ""),
+              edge_click: state.manager.rawMetadataParser.getString(givenData, "edge_click", ""),
+              contains_edge_hover: false,
+              contains_edge_click: false,
+            };
+            if(!parsedData.general.directed){
+              parsedData.general.arrow_size = 0.0;
+            }
+          },
+
+          parseNodes(givenData, parsedData){
+            const numNodes = state.manager.rawDataParser.getObjectLengthOrZero(givenData.nodes),
+              nodeIdToObjectMap = new Map(),
+              nodeDefinedMetadata = new Set(
+                ["color", "opacity", "size", "shape", "border_color", "border_size",
+                 "label_color", "label_size", "hover", "click", "image", "x", "y"]),
+              nodeReplacementVariables = [
+                "id", "label",
+                "color", "opacity", "size", "shape", "border_color", "border_size",
+                "label_color", "label_size", "image", "x", "y"];
+            state.manager.propertyClassifier.init();
+            try {
+              Object.entries(givenData.nodes);
+            }
+            catch(e){
+               givenData.nodes = {};
+            }
+            for (const [givenNodeId, givenNode] of Object.entries(givenData.nodes)) {
+              const parsedNode = {};
+              // data: id, label
+              parsedNode.id = String(givenNodeId);
+              parsedNode.label = state.manager.rawDataParser.getString(givenNode, "label", "");
+              // defined metadata
+              parsedNode.color = state.manager.rawMetadataParser.getColor(givenNode, "color", parsedData.general.node_color);
+              parsedNode.opacity = state.manager.rawMetadataParser.getFinitePositiveNumber(givenNode, "opacity", parsedData.general.node_opacity);
+              parsedNode.size = state.manager.rawMetadataParser.getFinitePositiveNumber(givenNode, "size", parsedData.general.node_size);
+              parsedNode.shape = state.manager.rawMetadataParser.getString(givenNode, "shape", parsedData.general.node_shape);
+              parsedNode.border_color = state.manager.rawMetadataParser.getColor(givenNode, "border_color", parsedData.general.node_border_color);
+              parsedNode.border_size = state.manager.rawMetadataParser.getFinitePositiveNumber(givenNode, "border_size", parsedData.general.node_border_size);
+              parsedNode.label_color = state.manager.rawMetadataParser.getColor(givenNode, "label_color", parsedData.general.node_label_color);
+              parsedNode.label_size = state.manager.rawMetadataParser.getFinitePositiveNumber(givenNode, "label_size", parsedData.general.node_label_size);
+              const hover = state.manager.rawMetadataParser.getString(givenNode, "hover", parsedData.general.node_hover);
+              const image = state.manager.rawMetadataParser.getString(givenNode, "image", parsedData.general.node_image);
+              if(image !== ""){
+                parsedNode.image = image;
+                parsedData.general.contains_node_image = true;
+              }
+              if(hover !== ""){
+                parsedNode.hover = hover;
+                parsedData.general.contains_node_hover = true;
+              }
+              const click = state.manager.rawMetadataParser.getString(givenNode, "click", parsedData.general.node_click);
+              if(click !== ""){
+                parsedNode.click = click;
+                parsedData.general.contains_node_click = true;
+              }
+              const x = state.manager.rawMetadataParser.getFiniteNumberOrNull(givenNode, "x", parsedData.general.node_x);
+              const y = state.manager.rawMetadataParser.getFiniteNumberOrNull(givenNode, "y", parsedData.general.node_y);
+              const z = state.manager.rawMetadataParser.getFiniteNumberOrNull(givenNode, "z", parsedData.general.node_z);
+              if(x !== null){
+                parsedNode.fx = x;
+              }
+              if(y !== null){
+                parsedNode.fy = y;
+              }
+              if(z !== null){
+                parsedNode.fz = z;
+              }
+              // other metadata
+              const otherMetadata = state.manager.rawMetadataParser.collectOtherMetadata(givenNode, parsedNode, nodeDefinedMetadata);
+              // feature classification
+              const parsedNodeProperties = Object.keys(parsedNode);
+              for(let i=0; i<parsedNodeProperties.length; i++){
+                const property = parsedNodeProperties[i],
+                  value = parsedNode[property];
+                state.manager.propertyClassifier.inspect(parsedNode, property);
+              }
+              // variable replacements
+              if(parsedNode.hover){
+                parsedNode.hover = state.manager.replaceStringVariables(parsedNode.hover, parsedNode, nodeReplacementVariables);
+              }
+              if(parsedNode.click){
+                parsedNode.click = state.manager.replaceStringVariables(parsedNode.click, parsedNode, nodeReplacementVariables.concat(["hover"]));
+              }
+              // store the parsed node
+              parsedData.nodes.push(parsedNode);
+              // data structure for inserting node object references into edge data
+              nodeIdToObjectMap.set(parsedNode.id, parsedNode);
+            }
+            // Ensure numeric properties (except fx and fy) are stored as numbers and remember their extrema
+            const numericProperties = Array.from(state.manager.propertyClassifier.numeric).filter(name => name !== "fx" && name !== "fy"),
+              nonNumericProperties = Array.from(state.manager.propertyClassifier.nonNumeric),
+              minima = {},
+              maxima = {};
+            for(let i=0; i<numNodes; i++){
+              const parsedNode = parsedData.nodes[i];
+              for(let p=0; p<numericProperties.length; p++){
+                const property = numericProperties[p],
+                  numericValue = parseFloat(parsedNode[property]);
+                parsedNode[property] = numericValue;
+                if(isFinite(numericValue)){
+                  if(typeof(minima[property]) === "undefined" || numericValue < minima[property]){
+                    minima[property] = numericValue;
+                  }
+                  if(typeof(maxima[property]) === "undefined" || numericValue > maxima[property]){
+                    maxima[property] = numericValue;
+                  }
+                }
+              }
+            }
+            // Store feature classification and extrema
+            parsedData.general.node_properties = {
+              "node_size_data_sources": numericProperties,
+              "node_label_text_data_sources": nonNumericProperties.concat(numericProperties),
+              "minima": minima,
+              "maxima": maxima,
+            }
+            // Report empty graph
+            if(!(numNodes > 0)){
+              console.log("Caution: Graph with 0 nodes. The provided data might be in the wrong format.");
+            }
+            return nodeIdToObjectMap;
+          },
+
+          parseEdges(givenData, parsedData, nodeIdToObjectMap){
+            let numEdges = state.manager.rawDataParser.getArrayLengthOrZero(givenData.edges);
+            const knownEdgeIds = new Set(),
+              ignoredEdges = [],
+              edgeDefinedMetadata = new Set(
+                ["color", "opacity", "size", "label_color", "label_size", "hover", "click"]),
+              edgeReplacementVariables = [
+                "id", "label",
+                "color", "opacity", "size", "label_color", "label_size"];
+            state.manager.propertyClassifier.init();
+            for(let i=0; i<numEdges; i++){
+              const givenEdge = givenData.edges[i],
+                parsedEdge = {},
+                sourceId = String(givenEdge.source),
+                targetId = String(givenEdge.target);
+              // data: source, target, id, multi_edge_counter, label
+              try{
+                const sourceObj = nodeIdToObjectMap.get(sourceId);
+                const targetObj = nodeIdToObjectMap.get(targetId);
+                if(typeof(sourceObj) === "undefined" || typeof(targetObj) === "undefined"){
+                  throw "Invalid node reference.";
+                }
+                parsedEdge.source = sourceObj;
+                parsedEdge.target = targetObj;
+              } catch(e){
+                const ignoredEdge = {
+                  index: i,
+                  source: sourceId,
+                  target: targetId,
+                }
+                ignoredEdges.push(ignoredEdge);
+                continue;
+              }
+              const result = state.manager.rawDataParser.createUniqueEdgeId(sourceId, targetId, knownEdgeIds);
+              parsedEdge.id = result.id;
+              parsedEdge.multi_edge_counter = result.count;
+              parsedEdge.label = state.manager.rawDataParser.getString(givenEdge, "label", "");
+              // defined metadata
+              parsedEdge.color = state.manager.rawMetadataParser.getColor(givenEdge, "color", parsedData.general.edge_color);
+              parsedEdge.opacity = state.manager.rawMetadataParser.getFinitePositiveNumber(givenEdge, "opacity", parsedData.general.edge_opacity);
+              parsedEdge.size = state.manager.rawMetadataParser.getFinitePositiveNumber(givenEdge, "size", parsedData.general.edge_size);
+              parsedEdge.label_color = state.manager.rawMetadataParser.getColor(givenEdge, "label_color", parsedData.general.edge_label_color);
+              parsedEdge.label_size = state.manager.rawMetadataParser.getFinitePositiveNumber(givenEdge, "label_size", parsedData.general.edge_label_size);
+              const hover = state.manager.rawMetadataParser.getString(givenEdge, "hover", parsedData.general.edge_hover);
+              if(hover !== ""){
+                parsedEdge.hover = hover;
+                parsedData.general.contains_edge_hover = true;
+              }
+              const click = state.manager.rawMetadataParser.getString(givenEdge, "click", parsedData.general.edge_click);
+              if(click !== ""){
+                parsedEdge.click = click;
+                parsedData.general.contains_edge_click = true;
+              }
+              // other metadata
+              const otherMetadata = state.manager.rawMetadataParser.collectOtherMetadata(givenEdge, parsedEdge, edgeDefinedMetadata);
+              // feature classification
+              const parsedEdgeProperties = Object.keys(parsedEdge);
+              for(let i=0; i<parsedEdgeProperties.length; i++){
+                const property = parsedEdgeProperties[i],
+                  value = parsedEdge[property];
+                state.manager.propertyClassifier.inspect(parsedEdge, property);
+              }
+              // variable replacements
+              if(parsedEdge.hover){
+                parsedEdge.hover = state.manager.replaceStringVariables(parsedEdge.hover, parsedEdge, edgeReplacementVariables);
+              }
+              if(parsedEdge.click){
+                parsedEdge.click = state.manager.replaceStringVariables(parsedEdge.click, parsedEdge, edgeReplacementVariables.concat(["hover"]));
+              }
+              // store it
+              parsedData.edges.push(parsedEdge);
+            }
+            // Ensure numeric properties are stored as numbers and remember their extrema
+            const numericProperties = Array.from(state.manager.propertyClassifier.numeric),
+              nonNumericProperties = Array.from(state.manager.propertyClassifier.nonNumeric),
+              minima = {},
+              maxima = {};
+            numEdges = state.manager.rawDataParser.getArrayLengthOrZero(parsedData.edges)
+            for(let i=0; i<numEdges; i++){
+              const parsedEdge = parsedData.edges[i];
+              for(let p=0; p<numericProperties.length; p++){
+                const property = numericProperties[p],
+                  numericValue = parseFloat(parsedEdge[property]);
+                parsedEdge[property] = numericValue;
+                if(isFinite(numericValue)){
+                  if(typeof(minima[property]) === "undefined" || numericValue < minima[property]){
+                    minima[property] = numericValue;
+                  }
+                  if(typeof(maxima[property]) === "undefined" || numericValue > maxima[property]){
+                    maxima[property] = numericValue;
+                  }
+                }
+              }
+            }
+            // Store feature classification and extrema
+            parsedData.general.edge_properties = {
+              "edge_size_data_sources": numericProperties.filter(item => item !== "multi_edge_counter"),
+              "edge_label_text_data_sources": nonNumericProperties.concat(numericProperties).filter(
+                item => item !== "source" && item !== "target" && item !== "multi_edge_counter"),
+              "minima": minima,
+              "maxima": maxima,
+            }
+            // Report invalid edges
+            if(ignoredEdges.length > 0){
+              let message = undefined;
+              if(ignoredEdges.length == 1){
+                message = "Caution: " + ignoredEdges.length + " edge was ignored because it " +
+                  "refers to a node that is not part of the node list:\n";
+              } else{
+                message = "Caution: " + ignoredEdges.length + " edges were ignored because they " +
+                  "refer to a node that is not part of the node list:\n";
+              }
+              for(let i=0; i<ignoredEdges.length; i++){
+                const ignoredEdge = ignoredEdges[i];
+                message += '- Edge with index ' + ignoredEdge.index;
+                message += ', source "' + ignoredEdge.source;
+                message += '", target "' + ignoredEdge.target + '"\n';
+                if(i==9){
+                  message += '...';
+                  break;
+                }
+              }
+              console.log(message);
+            }
+          },
+
+          parseChosenData(chosenGraphNumber){
+            let givenData = state.rawData[chosenGraphNumber],
+              parsedData = {
+                general: {},
+                nodes: [],
+                edges: [],
+                adjacency: null,
+                incidence: null,
+              };
+            if(!givenData || givenData === null){
+              givenData = [];
+            }
+            // a) General
+            state.manager.parseGeneral(givenData, parsedData);
+            // b) Nodes
+            const nodeIdToObjectMap = state.manager.parseNodes(givenData, parsedData);
+            // c) Edges
+            state.manager.parseEdges(givenData, parsedData, nodeIdToObjectMap);
+            // Update state
+            state.parsedData = parsedData;
+            state.currentGraphParts = {};
+            // Update UI: show or hide containers
+            ui.elements.graphContainer.style.display = ui.convert.boolToDisplayStyle(true);
+            ui.elements.detailsContainer.style.display = ui.convert.boolToDisplayStyle(state.showDetails);
+            ui.elements.nodeImageMetaControl.style.display = ui.convert.boolToDisplayStyle(parsedData.general.contains_node_image);
+          },
+
+          // 3) Derive state.shownData from state.parsedData
+          createNodeToAdjacentNodesMap(){
+            const dataStructure = {
+              map: new Map(),
+              add(sourceNode, targetNode){
+                let adjacentNodes = this.map.get(sourceNode);
+                if(adjacentNodes){
+                  adjacentNodes.add(targetNode);
+                } else{
+                  adjacentNodes = new Set([targetNode]);
+                  this.map.set(sourceNode, adjacentNodes);
+                }
+              },
+            }
+            return dataStructure;
+          },
+
+          createNodeToIncidentEdgesMap(){
+            const dataStructure = {
+              map: new Map(),
+              add(node, edge){
+                let incidentEdges = this.map.get(node);
+                if(incidentEdges){
+                  incidentEdges.add(edge);
+                } else{
+                  incidentEdges = new Set([edge]);
+                  this.map.set(node, incidentEdges);
+                }
+              },
+            }
+            return dataStructure;
+          },
+
+          prepareShownData(){
+            const numNodes = state.parsedData.nodes.length,
+              numEdges = state.parsedData.edges.length;
+            state.shownData = {
+              "general": null,
+              "nodes": new Array(numNodes),
+              "edges": new Array(numEdges),
+            }
+            const nodeIdToObjectMap = new Map(),
+              nodeSizeNormalizer = state.manager.createNodeSizeNormalizer();
+            // a) General
+            state.shownData.general = {
+              "background_color": state.parsedData.general.background_color,
+              "arrow_size": state.parsedData.general.arrow_size,
+              "arrow_color": state.parsedData.general.arrow_color,
+              "directed": state.parsedData.general.directed,
+              "node_image_fetching_failed": false,
+            };
+            // b) Nodes
+            for(let i=0; i<numNodes; i++){
+              state.shownData.nodes[i] = {};
+              const parsedNode = state.parsedData.nodes[i],
+                shownNode = state.shownData.nodes[i];
+              shownNode.id = parsedNode.id;
+              shownNode.label = state.manager.calcSingleNodeLabelText(parsedNode);
+              shownNode.color = parsedNode.color;
+              shownNode.opacity = parsedNode.opacity;
+              shownNode.size = state.manager.calcSingleNodeSize(parsedNode, nodeSizeNormalizer);
+              shownNode.shape = parsedNode.shape;
+              shownNode.border_color = parsedNode.border_color;
+              shownNode.border_size = parsedNode.border_size;
+              shownNode.label_color = parsedNode.label_color;
+              shownNode.label_size = state.manager.calcSingleNodeLabelSize(parsedNode);
+              if(typeof(parsedNode.image) !== "undefined"){
+                shownNode.image = parsedNode.image;
+              }
+              if(typeof(parsedNode.hover) !== "undefined"){
+                shownNode.hover = parsedNode.hover;
+              }
+              if(typeof(parsedNode.click) !== "undefined"){
+                shownNode.click = parsedNode.click;
+              }
+              if(typeof(parsedNode.fx) !== "undefined"){
+                shownNode.fx = parsedNode.fx;
+              }
+              if(typeof(parsedNode.fy) !== "undefined"){
+                shownNode.fy = parsedNode.fy;
+              }
+              if(typeof(parsedNode.fz) !== "undefined"){
+                shownNode.fz = parsedNode.fz;
+              }
+              nodeIdToObjectMap.set(shownNode.id, shownNode);
+              // Derived properties for performance improvement in updateNodePositions
+              state.manager.calcSingleNodeSizeDerivatives(shownNode);
+              state.manager.calcSingleNodeLabelSizeDerivatives(shownNode);
+              state.manager.calcSingleNodeBorderSizeDerivatives(shownNode);
+            }
+            // c) Edges
+            const edgeSizeNormalizer = state.manager.createEdgeSizeNormalizer(),
+              nodeToAdjacentNodesMap = state.manager.createNodeToAdjacentNodesMap(),
+              nodeToIncidentEdgesMap = state.manager.createNodeToIncidentEdgesMap();
+            for(let i=0; i<numEdges; i++){
+              state.shownData.edges[i] = {};
+              const parsedEdge = state.parsedData.edges[i],
+                shownEdge = state.shownData.edges[i];
+              shownEdge.source = nodeIdToObjectMap.get(parsedEdge.source.id);
+              shownEdge.target = nodeIdToObjectMap.get(parsedEdge.target.id);
+              shownEdge.id = parsedEdge.id;
+              shownEdge.label = state.manager.calcSingleEdgeLabelText(parsedEdge);
+              shownEdge.color = parsedEdge.color;
+              shownEdge.opacity = parsedEdge.opacity;
+              shownEdge.size = state.manager.calcSingleEdgeSize(parsedEdge, edgeSizeNormalizer);
+              shownEdge.label_color = parsedEdge.label_color;
+              shownEdge.label_size = state.manager.calcSingleEdgeLabelSize(parsedEdge);
+              shownEdge.multi_edge_counter = parsedEdge.multi_edge_counter;
+              if(typeof(parsedEdge.hover) !== "undefined"){
+                shownEdge.hover = parsedEdge.hover;
+              }
+              if(typeof(parsedEdge.click) !== "undefined"){
+                shownEdge.click = parsedEdge.click;
+              }
+              // Derived properties for performance improvement in updateEdgePositions
+              shownEdge.multi_edge_curvature_factor = state.manager.calcSingleEdgeCurvatureFactor(parsedEdge);
+              // Data structure for highlighting adjacent nodes and incident edges to this node
+              nodeToAdjacentNodesMap.add(shownEdge.source, shownEdge.target);
+              nodeToAdjacentNodesMap.add(shownEdge.target, shownEdge.source);
+              nodeToIncidentEdgesMap.add(shownEdge.source, shownEdge);
+              nodeToIncidentEdgesMap.add(shownEdge.target, shownEdge);
+            }
+            state.shownData.adjacency = nodeToAdjacentNodesMap;
+            state.shownData.incidence = nodeToIncidentEdgesMap;
+          },
+
+          calcSingleNodeSize(parsedNode, nodeSizeNormalizer){
+            let nodeSize = nodeSizeNormalizer(parsedNode[state.nodeSizeDataSource]);
+            if(!isFinite(nodeSize)){
+              nodeSize = state.parsedData.general.node_size;
+            }
+            return nodeSize * state.nodeSizeFactor;
+          },
+
+          calcSingleNodeLabelText(parsedNode){
+            return String(parsedNode[state.nodeLabelTextDataSource]);
+          },
+
+          calcSingleNodeLabelSize(parsedNode){
+            return parsedNode.label_size * state.nodeLabelSizeFactor;
+          },
+
+          calcSingleNodeLabelPlacement(node){
+            let baseSize = node.size_half;
+            if(state.showNodeImages && typeof(node.image) !== "undefined"){
+              baseSize = (node.size_half > node.image_size_half) ? node.size_half : node.image_size_half;
+            }
+            return baseSize + node.label_size * 0.77 + 2.0;
+          },
+
+          calcSingleEdgeSize(parsedEdge, edgeSizeNormalizer){
+            let edgeSize = edgeSizeNormalizer(parsedEdge[state.edgeSizeDataSource]);
+            if(!isFinite(edgeSize)){
+              edgeSize = state.parsedData.general.edge_size;
+            }
+            return edgeSize * state.edgeSizeFactor;
+          },
+
+          calcSingleEdgeCurvatureFactor(parsedEdge){
+            const appearanceAdaptionFactor = 0.6;
+            return state.edgeCurvature * parsedEdge.multi_edge_counter * appearanceAdaptionFactor;
+          },
+
+          calcSingleEdgeLabelText(parsedEdge){
+            return String(parsedEdge[state.edgeLabelTextDataSource]);
+          },
+
+          calcSingleEdgeLabelSize(parsedEdge){
+            return parsedEdge.label_size * state.edgeLabelSizeFactor;
+          },
+
+          calcSingleNodeSizeDerivatives(shownNode){
+            shownNode.size_half = shownNode.size / 2.0;
+            const appearanceAdaptionFactor = 1.2;
+            shownNode.image_size = shownNode.size * state.nodeImageSizeFactor * appearanceAdaptionFactor;
+            shownNode.image_size_half = shownNode.image_size / 2.0;
+            shownNode.relative_label_placement = state.manager.calcSingleNodeLabelPlacement(shownNode);
+          },
+
+          calcSingleNodeLabelSizeDerivatives(shownNode){
+            shownNode.relative_label_placement = state.manager.calcSingleNodeLabelPlacement(shownNode);
+          },
+
+          calcSingleNodeBorderSizeDerivatives(shownNode){
+            shownNode.border_size_half = shownNode.border_size / 2.0;
+          },
+
+          createNodeSizeNormalizer(){
+            let normalizer;
+            if(state.useNodeSizeNormalization){
+              const dataMin = state.parsedData.general.node_properties.minima[state.nodeSizeDataSource],
+                dataMax = state.parsedData.general.node_properties.maxima[state.nodeSizeDataSource],
+                targetMin = state.nodeSizeNormalizationMin,
+                targetMax = state.nodeSizeNormalizationMax,
+                dataDiff = dataMax - dataMin,
+                targetDiff = targetMax - targetMin;
+              let factor = targetDiff / dataDiff;
+              if(!isFinite(factor) || factor === null){
+                factor = 0.0;
+              }
+              normalizer = function(val){
+                return (val - dataMin) * factor + targetMin;
+              }
+            } else{
+              normalizer = function(val){
+                return val;
+              }
+            }
+            return normalizer;
+          },
+
+          createEdgeSizeNormalizer(){
+            let normalizer;
+            if(state.useEdgeSizeNormalization){
+              const dataMin = state.parsedData.general.edge_properties.minima[state.edgeSizeDataSource],
+                dataMax = state.parsedData.general.edge_properties.maxima[state.edgeSizeDataSource],
+                targetMin = state.edgeSizeNormalizationMin,
+                targetMax = state.edgeSizeNormalizationMax,
+                dataDiff = dataMax - dataMin,
+                targetDiff = targetMax - targetMin;
+              let factor = targetDiff / dataDiff;
+              if(!isFinite(factor)){
+                factor = 0.0;
+              }
+              normalizer = function(val){
+                return (val - dataMin) * factor + targetMin;
+              }
+            } else{
+              normalizer = function(val){
+                return val;
+              }
+            }
+            return normalizer;
+          },
+
+          updateNodeSizes(){
+            // Data
+            const nodeSizeNormalizer = state.manager.createNodeSizeNormalizer();
+            for(let i=0; i<state.parsedData.nodes.length; i++){
+              const parsedNode = state.parsedData.nodes[i],
+                shownNode = state.shownData.nodes[i];
+              shownNode.size = state.manager.calcSingleNodeSize(parsedNode, nodeSizeNormalizer);
+              state.manager.calcSingleNodeSizeDerivatives(shownNode);
+            }
+            // UI
+            ui.composites.graph.updateNodeSizes();
+          },
+
+          updateNodeImageSizes(){
+            // Data
+            for(let i=0; i<state.parsedData.nodes.length; i++){
+              const parsedNode = state.parsedData.nodes[i],
+                shownNode = state.shownData.nodes[i];
+              state.manager.calcSingleNodeSizeDerivatives(shownNode);
+            }
+            // UI
+            ui.composites.graph.updateNodeImages();
+          },
+
+          updateNodeLabelTexts(){
+            // Data
+            for(let i=0; i<state.parsedData.nodes.length; i++){
+              const parsedNode = state.parsedData.nodes[i],
+                shownNode = state.shownData.nodes[i];
+              shownNode.label = state.manager.calcSingleNodeLabelText(parsedNode);
+            }
+            // UI
+            ui.composites.graph.updateNodeLabels();
+          },
+
+          updateNodeLabelSizes(){
+            // Data
+            for(let i=0; i<state.parsedData.nodes.length; i++){
+              const parsedNode = state.parsedData.nodes[i],
+                shownNode = state.shownData.nodes[i];
+              shownNode.label_size = state.manager.calcSingleNodeLabelSize(parsedNode);
+              state.manager.calcSingleNodeLabelSizeDerivatives(shownNode);
+            }
+            // UI
+            ui.composites.graph.updateNodeLabels();
+          },
+
+          updateEdgeSizes(){
+            // Data
+            const edgeSizeNormalizer = state.manager.createEdgeSizeNormalizer();
+            for(let i=0; i<state.parsedData.edges.length; i++){
+              const parsedEdge = state.parsedData.edges[i],
+                shownEdge = state.shownData.edges[i];
+              shownEdge.size = state.manager.calcSingleEdgeSize(parsedEdge, edgeSizeNormalizer);
+            }
+            // UI
+            ui.composites.graph.updateEdgeSizes();
+          },
+
+          updateEdgeCurvatures(){
+            // Data
+            for(let i=0; i<state.parsedData.edges.length; i++){
+              const parsedEdge = state.parsedData.edges[i],
+                shownEdge = state.shownData.edges[i];
+              shownEdge.multi_edge_curvature_factor = state.manager.calcSingleEdgeCurvatureFactor(parsedEdge);
+            }
+            // UI
+            ui.composites.graph.updateEdgeCurvatures();
+          },
+        }
+      }
+
+      const ui = {
+        symbols:{
+          // Choice of symbols is influenced by their appearance in different browsers
+          // Alternatives: "▼", "▽", "▾" / "▲", "△", "▴" / "▶", "▷", "▸" / "◀", "◁", "◂"
+          // ▶ is rendered strangely on some mobile phone browsers, ▸ remains normal
+          detailsShown: "▾",
+          detailsHidden: "▴",
+          menuShown: "▸",
+          menuHidden: "◂",
+          menuItemActive: "▸",
+          menuItemInactive: "▾",
+        },
+
+        elements:{
+          // Containers
+          mainContainer: document.getElementById("§RANDOM_ID§-main-div"),
+          tooltipContainer: document.getElementById("§RANDOM_ID§-tooltip-div"),
+          leftContainer: document.getElementById("§RANDOM_ID§-left-div"),
+          rightContainer: document.getElementById("§RANDOM_ID§-right-div"),
+          graphContainer: document.getElementById("§RANDOM_ID§-graph-div"),
+          detailsContainer: document.getElementById("§RANDOM_ID§-details-div"),
+          detailsHead: document.getElementById("§RANDOM_ID§-details-head"),
+          detailsBody: document.getElementById("§RANDOM_ID§-details-body"),
+          // Data sources
+          dataHead: document.getElementById("§RANDOM_ID§-data-head"),
+          dataBody: document.getElementById("§RANDOM_ID§-data-body"),
+          graphSelectionContainer: document.getElementById("§RANDOM_ID§-graph-select-div"),
+          graphSelection: document.getElementById("§RANDOM_ID§-graph-select"),
+          nodeSizeDataSourceSelect: document.getElementById("§RANDOM_ID§-node-size-data-source-select"),
+          nodeSizeNormalizationCheckbox: document.getElementById("§RANDOM_ID§-node-size-normalization-checkbox"),
+          nodeSizeNormalizationContainer: document.getElementById("§RANDOM_ID§-node-size-norm-div"),
+          nodeSizeNormalizationMinText: document.getElementById("§RANDOM_ID§-node-size-normalization-min-text"),
+          nodeSizeNormalizationMinSlider: document.getElementById("§RANDOM_ID§-node-size-normalization-min-slider"),
+          nodeSizeNormalizationMaxText: document.getElementById("§RANDOM_ID§-node-size-normalization-max-text"),
+          nodeSizeNormalizationMaxSlider: document.getElementById("§RANDOM_ID§-node-size-normalization-max-slider"),
+          edgeSizeDataSourceSelect: document.getElementById("§RANDOM_ID§-edge-size-data-source-select"),
+          edgeSizeNormalizationCheckbox: document.getElementById("§RANDOM_ID§-edge-size-normalization-checkbox"),
+          edgeSizeNormalizationContainer: document.getElementById("§RANDOM_ID§-edge-size-norm-div"),
+          edgeSizeNormalizationMinText: document.getElementById("§RANDOM_ID§-edge-size-normalization-min-text"),
+          edgeSizeNormalizationMinSlider: document.getElementById("§RANDOM_ID§-edge-size-normalization-min-slider"),
+          edgeSizeNormalizationMaxText: document.getElementById("§RANDOM_ID§-edge-size-normalization-max-text"),
+          edgeSizeNormalizationMaxSlider: document.getElementById("§RANDOM_ID§-edge-size-normalization-max-slider"),
+          // General
+          generalHead: document.getElementById("§RANDOM_ID§-general-head"),
+          generalBody: document.getElementById("§RANDOM_ID§-general-body"),
+          resetButton: document.getElementById("§RANDOM_ID§-reset"),
+          fullscreenButton: document.getElementById("§RANDOM_ID§-fullscreen-button"),
+          svgExportButton: document.getElementById("§RANDOM_ID§-svg"),
+          pngExportButton: document.getElementById("§RANDOM_ID§-png"),
+          jpgExportButton: document.getElementById("§RANDOM_ID§-jpg"),
+          // Nodes
+          nodeHead: document.getElementById("§RANDOM_ID§-node-head"),
+          nodeBody: document.getElementById("§RANDOM_ID§-node-body"),
+          nodeCheckbox: document.getElementById("§RANDOM_ID§-node-checkbox"),
+          nodeSizeFactorText: document.getElementById("§RANDOM_ID§-node-size-factor-text"),
+          nodeSizeFactorSlider: document.getElementById("§RANDOM_ID§-node-size-factor-slider"),
+          nodeDragFixCheckbox: document.getElementById("§RANDOM_ID§-node-drag-fix-checkbox"),
+          nodeHoverTooltipCheckbox: document.getElementById("§RANDOM_ID§-node-hover-tooltip-checkbox"),
+          nodeReleaseButton: document.getElementById("§RANDOM_ID§-node-release-button"),
+          // Node images
+          nodeImageHead: document.getElementById("§RANDOM_ID§-node-image-head"),
+          nodeImageBody: document.getElementById("§RANDOM_ID§-node-image-body"),
+          nodeImageCheckbox: document.getElementById("§RANDOM_ID§-node-image-checkbox"),
+          nodeImageMetaControl: document.getElementById("§RANDOM_ID§-node-image-meta-control"),
+          nodeImageSizeFactorText: document.getElementById("§RANDOM_ID§-node-image-size-factor-text"),
+          nodeImageSizeFactorSlider: document.getElementById("§RANDOM_ID§-node-image-size-factor-slider"),
+          // Node labels
+          nodeLabelHead: document.getElementById("§RANDOM_ID§-node-label-head"),
+          nodeLabelBody: document.getElementById("§RANDOM_ID§-node-label-body"),
+          nodeLabelCheckbox: document.getElementById("§RANDOM_ID§-node-label-checkbox"),
+          nodeLabelBorderCheckbox: document.getElementById("§RANDOM_ID§-node-label-border-checkbox"),
+          nodeLabelTextDataSourceSelect: document.getElementById("§RANDOM_ID§-node-label-data-source-select"),
+          nodeLabelSizeFactorText: document.getElementById("§RANDOM_ID§-node-label-size-factor-text"),
+          nodeLabelSizeFactorSlider: document.getElementById("§RANDOM_ID§-node-label-size-factor-slider"),
+          // Edges
+          edgeHead: document.getElementById("§RANDOM_ID§-edge-head"),
+          edgeBody: document.getElementById("§RANDOM_ID§-edge-body"),
+          edgeCheckbox: document.getElementById("§RANDOM_ID§-edge-checkbox"),
+          edgeSizeFactorText: document.getElementById("§RANDOM_ID§-edge-size-factor-text"),
+          edgeSizeFactorSlider: document.getElementById("§RANDOM_ID§-edge-size-factor-slider"),
+          edgeCurvatureText: document.getElementById("§RANDOM_ID§-edge-curvature-text"),
+          edgeCurvatureSlider: document.getElementById("§RANDOM_ID§-edge-curvature-slider"),
+          edgeHoverTooltipCheckbox: document.getElementById("§RANDOM_ID§-edge-hover-tooltip-checkbox"),
+          // Layout algorithm
+          layoutAlgorithmHead: document.getElementById("§RANDOM_ID§-layout-algorithm-head"),
+          layoutAlgorithmBody: document.getElementById("§RANDOM_ID§-layout-algorithm-body"),
+          simulationCheckbox: document.getElementById("§RANDOM_ID§-simulation-active-checkbox"),
+          manyBodyForceCheckbox: document.getElementById("§RANDOM_ID§-many-body-force-checkbox"),
+          manyBodyForceContainer: document.getElementById("§RANDOM_ID§-many-body-force-div"),
+          manyBodyForceStrengthText: document.getElementById("§RANDOM_ID§-many-body-force-strength-text"),
+          manyBodyForceStrengthSlider: document.getElementById("§RANDOM_ID§-many-body-force-strength-slider"),
+          manyBodyForceThetaText: document.getElementById("§RANDOM_ID§-many-body-force-theta-text"),
+          manyBodyForceThetaSlider: document.getElementById("§RANDOM_ID§-many-body-force-theta-slider"),
+          manyBodyForceMinDistCheckbox: document.getElementById("§RANDOM_ID§-many-body-force-min-distance-checkbox"),
+          manyBodyForceMinDistContainer: document.getElementById("§RANDOM_ID§-many-body-force-min-distance-div"),
+          manyBodyForceMinDistText: document.getElementById("§RANDOM_ID§-many-body-force-min-distance-text"),
+          manyBodyForceMinDistSlider: document.getElementById("§RANDOM_ID§-many-body-force-min-distance-slider"),
+          manyBodyForceMaxDistCheckbox: document.getElementById("§RANDOM_ID§-many-body-force-max-distance-checkbox"),
+          manyBodyForceMaxDistContainer: document.getElementById("§RANDOM_ID§-many-body-force-max-distance-div"),
+          manyBodyForceMaxDistText: document.getElementById("§RANDOM_ID§-many-body-force-max-distance-text"),
+          manyBodyForceMaxDistSlider: document.getElementById("§RANDOM_ID§-many-body-force-max-distance-slider"),
+          linksForceCheckbox: document.getElementById("§RANDOM_ID§-links-force-checkbox"),
+          linksForceContainer: document.getElementById("§RANDOM_ID§-links-force-div"),
+          linksForceDistanceText: document.getElementById("§RANDOM_ID§-links-force-distance-text"),
+          linksForceDistanceSlider: document.getElementById("§RANDOM_ID§-links-force-distance-slider"),
+          linksForceStrengthText: document.getElementById("§RANDOM_ID§-links-force-strength-text"),
+          linksForceStrengthSlider: document.getElementById("§RANDOM_ID§-links-force-strength-slider"),
+          xPositioningForceCheckbox: document.getElementById("§RANDOM_ID§-x-positioning-force-checkbox"),
+          xPositioningForceContainer: document.getElementById("§RANDOM_ID§-x-positioning-force-div"),
+          xPositioningForceStrengthText: document.getElementById("§RANDOM_ID§-x-positioning-force-strength-text"),
+          xPositioningForceStrengthSlider: document.getElementById("§RANDOM_ID§-x-positioning-force-strength-slider"),
+          yPositioningForceCheckbox: document.getElementById("§RANDOM_ID§-y-positioning-force-checkbox"),
+          yPositioningForceContainer: document.getElementById("§RANDOM_ID§-y-positioning-force-div"),
+          yPositioningForceStrengthText: document.getElementById("§RANDOM_ID§-y-positioning-force-strength-text"),
+          yPositioningForceStrengthSlider: document.getElementById("§RANDOM_ID§-y-positioning-force-strength-slider"),
+          zPositioningForceCheckbox: document.getElementById("§RANDOM_ID§-z-positioning-force-checkbox"),
+          zPositioningForceContainer: document.getElementById("§RANDOM_ID§-z-positioning-force-div"),
+          zPositioningForceStrengthText: document.getElementById("§RANDOM_ID§-z-positioning-force-strength-text"),
+          zPositioningForceStrengthSlider: document.getElementById("§RANDOM_ID§-z-positioning-force-strength-slider"),
+          centeringForceCheckbox: document.getElementById("§RANDOM_ID§-centering-force-checkbox"),
+        },
+
+        composites:{
+          responsiveContainer:{
+            init(){
+              // Delete all contained items (relevant only for reset, not first creation)
+              ui.deleteChildElements(ui.elements.graphContainer);
+              ui.deleteChildElements(ui.elements.detailsBody);
+              // Menu
+              if(state.showMenu){
+                ui.composites.menu.show();
+              } else{
+                ui.composites.menu.hide();
+              }
+              // Details
+              if(state.showDetails){
+                ui.composites.details.show(true);
+              } else{
+                ui.composites.details.hide(true);
+              }
+              // Divs
+              ui.composites.responsiveContainer.setInnerHeights();
+              ui.composites.responsiveContainer.setOuterHeights();
+              ui.composites.responsiveContainer.getInnerWidths();
+            },
+
+            getInnerWidths(){
+              state.graphContainerWidth = parseInt(ui.elements.graphContainer.clientWidth);
+              state.detailsContainerWidth = parseInt(ui.elements.detailsContainer.clientWidth);
+            },
+
+            getInnerHeights(){
+              state.graphContainerHeight = parseInt(ui.elements.graphContainer.clientHeight);
+              if(state.showDetails){
+                state.detailsContainerHeight = parseInt(ui.elements.detailsContainer.clientHeight);
+              }
+            },
+
+            setInnerHeights(){
+              ui.elements.graphContainer.style.height = state.graphContainerHeight + "px";
+              ui.elements.detailsContainer.style.height = state.detailsContainerHeight + "px";
+            },
+
+            setOuterHeights(){
+              ui.elements.mainContainer.style.height = ui.elements.leftContainer.offsetHeight + "px";
+            },
+
+            getSizes(){
+              ui.composites.responsiveContainer.getInnerWidths();
+              ui.composites.responsiveContainer.getInnerHeights();
+            },
+
+            setSizes(){
+              ui.composites.responsiveContainer.setInnerHeights();
+              ui.composites.responsiveContainer.setOuterHeights();
+            },
+
+            adaptToResize(){
+              ui.composites.responsiveContainer.getSizes();
+              ui.composites.responsiveContainer.setSizes();
+            },
+
+            adaptToFullscreen(){
+              ui.composites.responsiveContainer.getSizes();
+              if(document.fullscreenElement){
+                // On entering fullscreen, remember the current container heights
+                state.beforeFullscreenGraphContainerHeight = state.graphContainerHeight;
+                state.beforeFullscreenDetailsContainerHeight = state.detailsContainerHeight;
+                // and then adapt them to maximum height possible in full screen mode
+                function calculateFullscreenMaxGraphHeight(){
+                  let outerHeight = null;
+                  try{
+                    const mainDivComputedStyle = window.getComputedStyle(ui.elements.mainContainer),
+                      graphDivComputedStyle = window.getComputedStyle(ui.elements.graphContainer),
+                      paddingTop = parseFloat(mainDivComputedStyle.paddingTop),
+                      borderTop = parseFloat(graphDivComputedStyle.borderTopWidth),
+                      borderBottom = parseFloat(graphDivComputedStyle.borderBottomWidth),
+                      paddingBottom = parseFloat(mainDivComputedStyle.paddingBottom);
+                    outerHeight = paddingTop + borderTop + borderBottom + paddingBottom;
+                    if(!isFinite(outerHeight) || outerHeight === null){
+                      throw "Invalid number";
+                    }
+                  } catch(e){
+                    // Hard coded fallback, depends on CSS of containers (1px borders, 6px padding)
+                    outerHeight = 1 + 3 + 3 + 1;
+                  }
+                  let graphHeight = screen.height - outerHeight;
+                  if(state.showDetails){
+                    graphHeight -= ui.composites.details.calculateHeightDifference();
+                  }
+                  return graphHeight;
+                }
+                state.graphContainerHeight = calculateFullscreenMaxGraphHeight();
+              } else{
+                // On leaving fullscreen, set container heights back to remembered values
+                state.graphContainerHeight = state.beforeFullscreenGraphContainerHeight;
+                state.detailsContainerHeight = state.beforeFullscreenDetailsContainerHeight;
+              }
+              ui.composites.responsiveContainer.setSizes();
+            },
+          },
+
+          menu:{
+            show(){
+              ui.elements.leftContainer.style.width = "80%";
+              ui.elements.rightContainer.style.width = "20%";
+              ui.elements.rightContainer.style.display = "block";
+            },
+
+            hide(){
+              ui.elements.leftContainer.style.width = "100%";
+              ui.elements.rightContainer.style.width = "0%";
+              ui.elements.rightContainer.style.display = "none";
+            },
+
+            toggle(){
+              // Update menu button
+              const div = ui.elements.menuToggleDiv;
+              state.showMenu = !state.showMenu;
+              if(state.showMenu){
+                div.innerText = ui.symbols.menuShown;
+                ui.composites.menu.show();
+              } else {
+                div.innerHTML = ui.symbols.menuHidden;
+                ui.composites.menu.hide();
+              }
+
+              // Update rest of UI
+              ui.composites.responsiveContainer.getInnerWidths();
+              ui.composites.responsiveContainer.getInnerHeights();
+              ui.composites.responsiveContainer.setOuterHeights();
+              ui.composites.graph.updateGraphDrawingArea();
+            },
+
+            setItem(keyElement, valElement, toActive){
+              const currentText = keyElement.innerHTML;
+              let sliceStart = 0;
+              if(currentText.startsWith(ui.symbols.menuItemActive)){
+                sliceStart = ui.symbols.menuItemActive.length;
+              } else if (currentText.startsWith(ui.symbols.menuItemInactive)){
+                sliceStart = ui.symbols.menuItemInactive.length;
+              }
+              if(toActive){
+                keyElement.innerHTML = ui.symbols.menuItemActive + currentText.slice(sliceStart);
+                keyElement.style.backgroundColor = "#f5f5f5";
+                keyElement.style.color = "black";
+                keyElement.style.borderColor = "#999";
+                keyElement.style.boxShadow = "0px 0px 3px rgba(0, 0, 0, 0.35)";
+                valElement.style.display = "block";
+              } else {
+                keyElement.innerHTML = ui.symbols.menuItemInactive + currentText.slice(sliceStart);
+                keyElement.style.backgroundColor = "white";
+                keyElement.style.color = "#222";
+                keyElement.style.borderColor = "#ccc";
+                keyElement.style.boxShadow = "0px 0px 3px rgba(0, 0, 0, 0.2)";
+                valElement.style.display = "none";
+              }
+            },
+
+            toggleItem(keyElement, valElement){
+              const toActive = !(valElement.style.display !== "none");
+              ui.composites.menu.setItem(keyElement, valElement, toActive);
+            },
+          },
+
+          details:{
+            calculateHeightDifference(){
+              let outerHeight = null;
+              try{
+                const graphContainerComputedStyle = window.getComputedStyle(ui.elements.graphContainer),
+                  detailsContainerComputedStyle = window.getComputedStyle(ui.elements.detailsContainer),
+                  border1 = parseFloat(graphContainerComputedStyle.borderBottomWidth),
+                  margin = parseFloat(detailsContainerComputedStyle.marginTop),
+                  border2 = parseFloat(detailsContainerComputedStyle.borderTopWidth);
+                outerHeight = border1 + margin + border2;
+                if(!isFinite(outerHeight) || outerHeight === null){
+                  throw "Invalid number";
+                }
+              } catch(e){
+                // Hard coded fallback, depends on CSS of containers (1px borders, 5px margin)
+                outerHeight = 7.0;
+              }
+              return state.detailsContainerHeight + outerHeight
+            },
+
+            show(init=false){
+              // Visibility
+              ui.elements.detailsContainer.style.display = "block";
+              if(!init){
+                // Height
+                const heightDiff = ui.composites.details.calculateHeightDifference();
+                state.graphContainerHeight -= heightDiff;
+                if(state.graphContainerHeight < 70){
+                  state.graphContainerHeight = 70;
+                }
+                // Update rest of UI
+                ui.composites.responsiveContainer.setSizes();
+                ui.composites.graph.updateGraphDrawingArea();
+              }
+            },
+
+            hide(init=false){
+              // Visibility
+              ui.elements.detailsContainer.style.display = "none";
+              if(!init){
+                // Height
+                const heightDiff = ui.composites.details.calculateHeightDifference();
+                state.graphContainerHeight += heightDiff;
+                // Update rest of UI
+                ui.composites.responsiveContainer.setSizes();
+                ui.composites.graph.updateGraphDrawingArea();
+              }
+            },
+
+            toggle(){
+              // Update details button
+              const toggleDiv = ui.elements.detailsToggleDiv;
+              state.showDetails = !state.showDetails;
+              if(state.showDetails){
+                toggleDiv.innerText = ui.symbols.detailsShown;
+                ui.composites.details.show();
+              } else {
+                toggleDiv.innerHTML = ui.symbols.detailsHidden;
+                ui.composites.details.hide();
+              }
+            },
+          },
+
+          download:{
+            png(filename){
+              ui.composites.download._rasterImage(filename, "png");
+            },
+
+            jpg(filename){
+              ui.composites.download._rasterImage(filename, "jpeg");
+            },
+
+            _rasterImage(filename, format, resolutionFactor=4.0){
+              const renderer = state.webglGraph.renderer(),
+                scene = state.webglGraph.scene(),
+                camera = state.webglGraph.camera(),
+                mimeType = "image/" + format,
+                size = new THREE.Vector2(0, 0);
+
+              renderer.getSize(size);
+              const width = size.x,
+                height = size.y;
+
+              function upsize(){
+                renderer.setSize(width * resolutionFactor, height * resolutionFactor);
+                renderer.render(scene, camera);
+              }
+              function downsize(){
+                renderer.setSize(width, height);
+                renderer.render(scene, camera);
+              }
+              // Increase resolution
+              upsize();
+              // Create image and decrease solution to original value
+              function finishedBlobCallback(blob){
+                ui.composites.download._blobToFileDownload(blob, filename);
+                downsize();
+              }
+              renderer.domElement.toBlob(finishedBlobCallback, mimeType, 1.0);
+            },
+
+            _blobToFileDownload(blob, filename){
+              const url = URL.createObjectURL(blob),
+                a = document.createElement("a");
+              function handleClick(){
+                setTimeout(function(){
+                  // Long waiting time before removal for slow devices like mobile phones
+                  URL.revokeObjectURL(url);
+                  this.removeEventListener("click", handleClick);
+                }, 20000);
+              };
+              document.body.appendChild(a);
+              a.href = url;
+              a.download = filename;
+              a.addEventListener("click", handleClick, false);
+              a.click();
+              document.body.removeChild(a);
+            },
+          },
+
+          selection(element, optionList, valueList=undefined) {
+            while(element.hasChildNodes()){
+              element.removeChild(element.firstChild);
+            }
+            for(let i=0; i<optionList.length; i++){
+              let text = optionList[i];
+              let value = text;
+              if(valueList){
+                value = valueList[i];
+              }
+              let opt = document.createElement("option");
+              opt.appendChild(document.createTextNode(text));
+              opt.value = value;
+              element.appendChild(opt);
+            }
+          },
+
+          tooltip:{
+            show(xShift=null, yShift=null){
+              if(isFinite(xShift) && xShift !== null){
+                ui.elements.tooltipContainer.style.left =  parseInt(xShift) + "px";
+              }
+              if(isFinite(yShift) && yShift !== null){
+                ui.elements.tooltipContainer.style.top = parseInt(yShift) + "px";
+              }
+              ui.elements.tooltipContainer.style.transition = "visibility 0s, opacity 0.1s";
+              ui.elements.tooltipContainer.style.visibility = "visible";
+              ui.elements.tooltipContainer.style.opacity = 1.0;
+            },
+
+            hide(){
+              ui.elements.tooltipContainer.style.transition = "visibility 0.3s, opacity 0.3s ease-in";
+              ui.elements.tooltipContainer.style.visibility = "hidden";
+              ui.elements.tooltipContainer.style.opacity = 0.0;
+            },
+          },
+
+          progressBar:{
+            create(){
+              // Main container
+              this.mainContainer = document.createElement("div");
+              this.mainContainer.id = "§RANDOM_ID§-progress-container";
+              this.mainContainer.style.backgroundColor = state.shownData.general.background_color;
+              ui.elements.graphContainer.style.backgroundColor = state.shownData.general.background_color;
+              // Text container
+              const numNodes = state.parsedData.nodes.length;
+              this.textContainer = document.createElement("div");
+              this.textContainer.innerText = "Large graph with " + numNodes + " nodes. Calculating an initial layout before visualizing it.";
+              this.textContainer.style.textAlign = "center";
+              // Bar container
+              this.outerBarContainer = document.createElement("div");
+              this.outerBarContainer.style.border = "1px solid black";
+              this.outerBarContainer.style.borderRadius = "4px";
+              this.outerBarContainer.style.marginTop = "1ex";
+              this.outerBarContainer.style.padding = "1px";
+              this.innerBarContainer = document.createElement("div");
+              this.innerBarContainer.style.backgroundColor = "black";
+              this.innerBarContainer.style.width = "0%";
+              this.innerBarContainer.style.height = "8px";
+              this.innerBarContainer.style.borderRadius = "3px";
+              // Add them to DOM
+              this.outerBarContainer.appendChild(this.innerBarContainer);
+              this.mainContainer.appendChild(this.textContainer);
+              // this.mainContainer.appendChild(this.outerBarContainer);  // Hide bar (not updated)
+              ui.elements.graphContainer.appendChild(this.mainContainer);
+            },
+
+            update(percentage){
+              this.innerBarContainer.style.width = percentage + "%";
+            },
+
+            remove(){
+              ui.elements.graphContainer.removeChild(this.mainContainer);
+            }
+          },
+
+          graph:{
+            createGraph(){
+              // Remove existing elements
+              ui.deleteChildElements(ui.elements.graphContainer);
+
+              // Create new elements
+              // - Graph
+              state.webglGraph = ForceGraph3D()(ui.elements.graphContainer)
+                .showNavInfo(false)
+                .backgroundColor(state.shownData.general.background_color)
+                .width(state.graphContainerWidth)
+                .height(state.graphContainerHeight);
+              // Attempt to prevent some memory leaks
+              const renderer = state.webglGraph.renderer();
+              state.threeObjects.trackRenderer("currentGraph", renderer);
+              const renderTarget = renderer.getRenderTarget();
+              state.threeObjects.trackRenderTarget("currentRenderTarget", renderTarget);
+              // - Menu toggle button
+              if(state.showMenuToggleButton){
+                const menuDiv = document.createElement("div");
+                if(state.showMenu){
+                  menuDiv.innerText = ui.symbols.menuShown;
+                } else {
+                  menuDiv.innerText = ui.symbols.menuHidden;
+                }
+                menuDiv.id = "§RANDOM_ID§-menu-toggle-button";
+                menuDiv.onclick = ui.composites.menu.toggle;
+                ui.elements.graphContainer.appendChild(menuDiv);
+                ui.elements.menuToggleDiv = menuDiv;
+              }
+              // - Details toggle button
+              if(state.showDetailsToggleButton){
+                const detailsDiv = document.createElement("div");
+                if(state.showDetails){
+                  detailsDiv.innerText = ui.symbols.detailsShown;
+                } else {
+                  detailsDiv.innerText = ui.symbols.detailsHidden;
+                }
+                detailsDiv.id = "§RANDOM_ID§-details-toggle-button";
+                detailsDiv.onclick = ui.composites.details.toggle;
+                ui.elements.graphContainer.appendChild(detailsDiv);
+                ui.elements.detailsToggleDiv = detailsDiv;
+              }
+              // Wait a bit to finish UI rendering, then start potentially slow layout computation
+              setTimeout(function(){
+                // - Layout algorithm
+                ui.composites.graph.setLayout();
+                // - Data
+                const data = {
+                  nodes: state.shownData.nodes,
+                  links: state.shownData.edges,
+                };
+                state.webglGraph
+                  .graphData(data);
+                // - Nodes
+                state.webglGraph
+                  .nodeThreeObject(ui.composites.graph.createSingleNodeObject)
+                  .nodeVisibility(state.showNodes);
+                // - Edges
+                // Uses linkMaterial because linkOpacity can only be a single number, not function
+                state.webglGraph
+                  .linkVisibility(state.showEdges)
+                  .linkWidth(edge => edge.size)
+                  .linkCurvature(ui.composites.graph._calcEdgeCurvature)
+                  .linkMaterial(ui.composites.graph.createSingleEdgeMaterial);
+                if(state.shownData.general.directed){
+                  state.webglGraph
+                    .linkDirectionalArrowColor(edge => state.shownData.general.arrow_color)
+                    .linkDirectionalArrowLength(edge => state.shownData.general.arrow_size)
+                    .linkDirectionalArrowRelPos(ui.composites.graph._calcArrowPosition);
+                }
+                // - Graph behavior
+                ui.composites.graph.setBehavior();
+              }, 250);
+            },
+
+            _calcArrowPosition(edge){
+              if(edge.source === edge.target){
+                // Case 1: Self loop
+                return 0.5;
+              } else{
+                // Case 2: Normal edge
+                const dx = edge.target.x - edge.source.x,
+                  dy = edge.target.y - edge.source.y,
+                  dz = edge.target.z - edge.source.z,
+                  len = Math.sqrt(dx**2 + dy**2 + dz**2);
+                return 0.99 - edge.target.size_half / len;
+              }
+            },
+
+            setLayout(){
+              // Store all forces provided by the library (for reuse when turning them off)
+              state.predefinedForces = {
+                "charge": state.webglGraph.d3Force("charge"),
+                "link": state.webglGraph.d3Force("link"),
+                "center": state.webglGraph.d3Force("center"),
+              }
+              ui.composites.graph.simulationManager.setAllForces();
+              state.webglGraph
+                .d3VelocityDecay(0.3);  // default 0.4, lower value means less friction
+
+              // - Progress bar: only if large graph, stops simulation to get initial static image
+              const numNodes = state.parsedData.nodes.length;
+              if(numNodes > state.largeGraphThreshold){
+                // Layout start
+                ui.composites.progressBar.create();
+                let numIterations = 40;
+                if(numNodes >= 25000){
+                  numIterations = 9;
+                } else if(numNodes >= 10000){
+                  numIterations = 13;
+                } else if(numNodes >= 5000){
+                  numIterations = 18;
+                } else if(numNodes >= 2000){
+                  numIterations = 25;
+                } else if(numNodes >= 1000){
+                  numIterations = 35;
+                }
+                // Layout update
+                state.webglGraph
+                  .warmupTicks(numIterations);
+                // Layout finished
+                state.webglGraph
+                  .onEngineTick(function(){
+                    // Freeze graph after warmup to get a static rendering
+                    state.webglGraph.cooldownTicks(0);
+                    // Remove progress message
+                    ui.composites.progressBar.remove();
+                  })
+                  .onEngineStop(function(){
+                    // Remove tick functions
+                    state.webglGraph.onEngineTick(function(){});
+                    state.webglGraph.onEngineStop(function(){});
+                    // Unfreeze graph for future user interaction
+                    state.webglGraph.cooldownTicks(Infinity);
+                  })
+              }
+            },
+
+            setBehavior(){
+              // - Node click behavior
+              function createNodeText(node){
+                let htmlText = "<div>Node: " + String(node.id) + "</div>";
+                if(typeof(node.click) !== "undefined" && node.click !== ""){
+                  htmlText += '<div id="§RANDOM_ID§-details-user-provided">' + node.click + '</div>';
+                }
+                return htmlText;
+              }
+              state.webglGraph
+                .onNodeClick(function(node){
+                  try {
+                    ui.elements.detailsBody.innerHTML = createNodeText(node);
+                  } catch(e) {
+                  };
+                });
+              // - Node drag behavior
+              state.webglGraph
+                .onNodeDragEnd(function(node){
+                  if(state.nodeDragFix){
+                    node.fx = node.x;
+                    node.fy = node.y;
+                    node.fz = node.z;
+                  } else{
+                    node.fx = null;
+                    node.fy = null;
+                    node.fz = null;
+                  }
+                });
+              // - Edge click behavior
+              function createEdgeText(edge){
+                let htmlText = "<div>Edge: " + String(edge.id) + "</div>";
+                if(typeof(edge.click) !== "undefined" && edge.click !== ""){
+                  htmlText += '<div id="§RANDOM_ID§-details-user-provided">' + edge.click + '</div>';
+                }
+                return htmlText;
+              }
+              state.webglGraph
+                .onLinkClick(function(edge){
+                  try {
+                    ui.elements.detailsBody.innerHTML = createEdgeText(edge);
+                  } catch(e){
+                  };
+                });
+              // - Hover behavior
+              document.addEventListener("mousemove", function(event){
+                // Hack to get mouse position in hover event handler
+                // https://stackoverflow.com/questions/2601097/how-to-get-the-mouse-position-without-events-without-moving-the-mouse
+                state.cursorX = event.clientX;
+                state.cursorY = event.clientY;
+              });
+              function calculateRelativePosition(){
+                const cont = ui.elements.mainContainer,
+                  contAbsX = cont.offsetLeft,
+                  contAbsY = cont.offsetTop,
+                  contBoundingRect = cont.getBoundingClientRect(),
+                  contClientX = contBoundingRect.left,
+                  contClientY = contBoundingRect.top,
+                  contWidth = contBoundingRect.width;
+                let deltaX = state.cursorX - contClientX,
+                  deltaY = state.cursorY - contClientY,
+                  deltaXMax = contWidth * 0.85;
+                if(deltaX > deltaXMax){
+                  deltaX = deltaXMax;
+                }
+                const xShift = contAbsX + deltaX + 7,
+                  yShift = contAbsY + deltaY + 14;
+                return {"xShift": xShift, "yShift": yShift};
+              }
+              // - Node hover behavior
+              state.webglGraph
+                .onNodeHover(function (node){
+                  if(node !== null){
+                    if(typeof(node.hover) !== "undefined"){
+                      if(state.nodeHoverTooltip){
+                        const relPos = calculateRelativePosition();
+                        ui.elements.tooltipContainer.innerHTML = node.hover;
+                        ui.composites.tooltip.show(relPos.xShift, relPos.yShift);
+                      }
+                    }
+                  } else{
+                    ui.composites.tooltip.hide();
+                  }
+                });
+              // - Edge hover behavior
+              state.webglGraph
+                .onLinkHover(function (edge){
+                  if(edge !== null){
+                    if(typeof(edge.hover) !== "undefined"){
+                      if(state.edgeHoverTooltip){
+                        const relPos = calculateRelativePosition();
+                        ui.elements.tooltipContainer.innerHTML = edge.hover;
+                        ui.composites.tooltip.show(relPos.xShift, relPos.yShift);
+                      }
+                    }
+                  } else{
+                    ui.composites.tooltip.hide();
+                  }
+                });
+            },
+
+            updateGraphDrawingArea(){
+              state.webglGraph
+                .width(state.graphContainerWidth)
+                .height(state.graphContainerHeight)
+            },
+
+            // Nodes
+            createSingleNodeObject(node){
+              let obj = null;
+              // Object creator functions
+              function createGeometicObject(id, shape, size, sizeHalf, color, opacity){
+                const material = new THREE.MeshLambertMaterial({
+                  color: color,
+                  opacity: opacity,
+                  transparent: true,
+                  depthWrite: true,
+                });
+                state.threeObjects.trackMaterial(id, material);
+                let geometry = null;
+                if (shape == "rectangle") {
+                  geometry = new THREE.BoxGeometry(size, size, size);  // width, height, depth
+                } else if (shape == "hexagon") {
+                  geometry = new THREE.IcosahedronGeometry(sizeHalf);  // radius
+                } else {
+                  geometry = new THREE.SphereGeometry(sizeHalf, 16, 12);  // radius, widthSegments, heightSegments
+                }
+                state.threeObjects.trackGeometry(id, geometry);
+                obj = new THREE.Mesh(geometry, material);
+                return obj;
+              }
+              function createImageObject(id, image, size){
+                const material = new THREE.MeshBasicMaterial({
+                  transparent: true,
+                  depthWrite: false,
+                  opacity: 0.0,
+                });
+                const geometry = new THREE.SphereGeometry(size);
+                obj = new THREE.Mesh(geometry, material);
+                state.threeObjects.trackGeometry(id, geometry);
+                state.threeObjects.trackMaterial(id, material);
+                function onTextureLoad(texture){
+                  const width = texture.image.width,
+                    height = texture.image.height,
+                    factor1 = width / size,
+                    factor2 = height / size,
+                    largerFactor = (factor1 > factor2) ? factor1 : factor2;
+                  const imageMaterial = new THREE.SpriteMaterial({map: imageTexture});
+                  state.threeObjects.trackMaterial(id+"image", imageMaterial);
+                  const imageSprite = new THREE.Sprite(imageMaterial);
+                  imageSprite.scale.set(width / largerFactor, height / largerFactor, 1);
+                  obj.add(imageSprite);
+                }
+                const imageTexture = new THREE.TextureLoader().load(image, onTextureLoad);
+                state.threeObjects.trackTexture(id, imageTexture);
+                imageTexture.minFilter = THREE.LinearFilter;
+                return obj;
+              }
+              function createTextSpriteObject(id, text, fontSize, fontColor, fontBorderColor, fontName){
+                // Parameter processing
+                fontSize = fontSize * 10;
+                const fontStyle = fontSize + "px " + fontName;
+                // Canvas preparation: appropriate size for given text and text style
+                const canvas = document.createElement("canvas"),
+                  context = canvas.getContext("2d");
+                context.font = fontStyle;
+                const exactWidth = context.measureText(text).width,
+                  approxHeight = context.measureText("M").width * 2.0;
+                canvas.width = exactWidth;
+                canvas.height = approxHeight;
+                context.font = fontStyle;
+                // Text to canvas
+                if(state.showNodeLabelBorders){
+                  context.lineWidth = 6;
+                  context.strokeStyle = fontBorderColor;
+                  context.strokeText(text, 0, fontSize);
+                }
+                context.fillStyle = fontColor;
+                context.fillText(text, 0, fontSize);
+                // Canvas to sprite
+                const texture = new THREE.Texture(canvas);
+                state.threeObjects.trackTexture(id+"text", texture);
+                texture.minFilter = THREE.LinearFilter;
+                texture.needsUpdate = true;
+                const spriteMaterial = new THREE.SpriteMaterial({map: texture, depthWrite: false}),
+                  sprite = new THREE.Sprite(spriteMaterial),
+                  sizeCorrectionFactor = 0.1;
+                state.threeObjects.trackMaterial(id+"text", spriteMaterial);
+                sprite.scale.set(exactWidth * sizeCorrectionFactor, approxHeight * sizeCorrectionFactor, 1);
+                return sprite;
+              }
+              // Parent object: Image or geometric object
+              if(state.showNodeImages && typeof(node.image) !== "undefined"){
+                obj = createImageObject(node.id, node.image, node.image_size);
+              } else{
+                obj = createGeometicObject(node.id, node.shape, node.size, node.size_half, node.color, node.opacity);
+              }
+              // Child object: Text sprite (optional)
+              if(state.showNodeLabels && node.label !== ""){
+                const sprite = createTextSpriteObject(
+                  node.id, node.label, node.label_size, node.label_color,
+                  state.shownData.general.background_color, state.nodeLabelFont);
+                let dx = 0,
+                  dy = -node.relative_label_placement,
+                  dz = 0;
+                sprite.position.set(dx, dy, dz);
+                obj.add(sprite);
+              }
+              return obj;
+            },
+
+            updateNodeVisibilities(){
+              state.webglGraph
+                .nodeVisibility(state.showNodes);
+            },
+
+            updateNodeSizes(){
+              state.webglGraph
+                .nodeThreeObject(ui.composites.graph.createSingleNodeObject);
+            },
+
+            // Node images
+            updateNodeImages(){
+              state.webglGraph
+                .nodeThreeObject(ui.composites.graph.createSingleNodeObject)
+            },
+
+            // Node labels
+            updateNodeLabels(){
+              state.webglGraph
+                .nodeThreeObject(ui.composites.graph.createSingleNodeObject)
+            },
+
+            // Edges
+            createSingleEdgeMaterial(edge){
+              const material = new THREE.MeshLambertMaterial({
+                color: edge.color,
+                opacity: edge.opacity,
+                transparent: true,
+                depthWrite: true,
+              });
+              return material;
+            },
+
+            updateEdgeVisibilities(){
+              state.webglGraph
+                .linkVisibility(state.showEdges)
+            },
+
+            updateEdgeSizes(){
+              state.webglGraph
+                .linkWidth(edge => edge.size);
+            },
+
+            _calcEdgeCurvature(edge){
+              if(edge.source === edge.target){
+                return ui.composites.graph._calcSelfLoopCurvature(edge);
+              } else{
+                return ui.composites.graph._calcNormalEdgeCurvature(edge);
+              }
+            },
+
+            _calcNormalEdgeCurvature(edge){
+              return edge.multi_edge_curvature_factor;
+            },
+
+            _calcSelfLoopCurvature(edge){
+              return edge.source.size / 50.0 + edge.multi_edge_counter / 4.0 + Math.abs(edge.multi_edge_curvature_factor);
+            },
+
+            updateEdgeCurvatures(){
+              state.webglGraph
+                .linkCurvature(ui.composites.graph._calcEdgeCurvature)
+                .linkVisibility(state.showEdges);  // causes a redraw, relevant if graph has stabilized
+            },
+
+            // Layout algorithm
+            simulationManager:{
+              move(){
+                if(state.layoutAlgorithmActive){
+                  state.webglGraph.d3ReheatSimulation();
+                }
+              },
+              restart(){
+                state.webglGraph.cooldownTicks(Infinity);
+                this.setAllForces();
+                this.move();
+              },
+              stop(){
+                state.webglGraph.cooldownTicks(0);
+                this.removeAllForces();
+              },
+              releaseFixedNodes(){
+                const nodes = state.shownData.nodes;
+                for(let i=0; i<nodes.length; i++){
+                  const node = nodes[i];
+                  node.fx = null;
+                  node.fy = null;
+                  node.fz = null;
+                }
+              },
+              setAllForces(){
+                this.setCenteringForce();
+                this.setLinksForce();
+                this.setManyBodyForce();
+                this.setXPositioningForce();
+                this.setYPositioningForce();
+                this.setZPositioningForce();
+              },
+              removeAllForces(){
+                state.webglGraph.d3Force("center", null);
+                state.webglGraph.d3Force("link", null);
+                state.webglGraph.d3Force("charge", null);
+                state.webglGraph.d3Force("x-positioning", null);
+                state.webglGraph.d3Force("y-positioning", null);
+                state.webglGraph.d3Force("z-positioning", null);
+              },
+              setCenteringForce(){
+                let centeringForce = null;
+                if(state.useCenteringForce && state.layoutAlgorithmActive){
+                  centeringForce = state.predefinedForces.center
+                    .x(0.0)
+                    .y(0.0);
+                }
+                state.webglGraph.d3Force("center", centeringForce);
+              },
+              setLinksForce(){
+                let linksForce = null;
+                if(state.useLinksForce && state.layoutAlgorithmActive){
+                  const nodes = state.shownData.nodes,
+                    edges = state.shownData.edges;
+                  if(!state.shownData.edgeCounts){
+                    const count = {};
+                    for(let i=0; i<edges.length; i++){
+                      const edge = edges[i];
+                      count[edge.source.id] = (count[edge.source.id] || 0) + 1;
+                      count[edge.target.id] = (count[edge.target.id] || 0) + 1;
+                    }
+                    state.shownData.edgeCounts = count;
+                  }
+                  const appearanceAdaptionFactor = 2.0;
+                  linksForce = state.predefinedForces.link
+                    .distance(state.linksForceDistance * appearanceAdaptionFactor)
+                    .strength(function(d){
+                      // Adapted from https://github.com/d3/d3-force/blob/master/src/link.js
+                      const fixedConnectivity = Math.min(
+                        state.shownData.edgeCounts[d.source.id],
+                        state.shownData.edgeCounts[d.target.id]
+                      );
+                      const adjustableStrength = 2.0 * state.linksForceStrength;
+                      return adjustableStrength / fixedConnectivity;
+                    });
+                }
+                state.webglGraph.d3Force("link", linksForce);
+              },
+              setManyBodyForce(){
+                let manyBodyForce = null;
+                if(state.useManyBodyForce && state.layoutAlgorithmActive){
+                  manyBodyForce = state.predefinedForces.charge
+                    .strength(state.manyBodyForceStrength)
+                    .theta(state.manyBodyForceTheta);
+                  if(state.useManyBodyForceMinDistance){
+                    manyBodyForce.distanceMin(state.manyBodyForceMinDistance);
+                  } else{
+                    manyBodyForce.distanceMin(0.0);
+                  }
+                  if(state.useManyBodyForceMaxDistance){
+                    manyBodyForce.distanceMax(state.manyBodyForceMaxDistance);
+                  } else{
+                    manyBodyForce.distanceMax(Infinity);
+                  }
+                }
+                state.webglGraph.d3Force("charge", manyBodyForce);
+              },
+              setXPositioningForce(){
+                let xPositioningForce = null;
+                if(state.useXPositioningForce && state.layoutAlgorithmActive){
+                  function userDefinedForce(alpha) {
+                    const nodes = state.shownData.nodes;
+                    for(let i=0; i<nodes.length; i++) {
+                      const node = nodes[i];
+                      node.vx += (0.0 - node.x) * alpha * state.xPositioningForceStrength;
+                    }
+                  }
+                  xPositioningForce = userDefinedForce;
+                }
+                state.webglGraph.d3Force("x-positioning", xPositioningForce);
+              },
+              setYPositioningForce(){
+                let yPositioningForce = null;
+                if(state.useYPositioningForce && state.layoutAlgorithmActive){
+                  function userDefinedForce(alpha) {
+                    const nodes = state.shownData.nodes;
+                    for(let i=0; i<nodes.length; i++) {
+                      const node = nodes[i];
+                      node.vy += (0.0 - node.y) * alpha * state.yPositioningForceStrength;
+                    }
+                  }
+                  yPositioningForce = userDefinedForce;
+                }
+                state.webglGraph.d3Force("y-positioning", yPositioningForce);
+              },
+              setZPositioningForce(){
+                let zPositioningForce = null;
+                if(state.useZPositioningForce && state.layoutAlgorithmActive){
+                  function userDefinedForce(alpha) {
+                    const nodes = state.shownData.nodes;
+                    for(let i=0; i<nodes.length; i++) {
+                      const node = nodes[i];
+                      node.vz += (0.0 - node.z) * alpha * state.zPositioningForceStrength;
+                    }
+                  }
+                  zPositioningForce = userDefinedForce;
+                }
+                state.webglGraph.d3Force("z-positioning", zPositioningForce);
+              },
+            },
+          },
+        },
+
+        init(){
+          // Containers
+          ui.composites.responsiveContainer.init();
+          // Graph selection (only visible if multiple graphs in data)
+          if(state.rawData.length > 1){
+            ui.elements.graphSelectionContainer.style.display = ui.convert.boolToDisplayStyle(true);
+            const optionList = [],
+              valueList = [];
+            let label;
+            for(let i=0; i<state.rawData.length; i++){
+              const graph = state.rawData[i];
+              try{
+                label = String(graph.label);
+                if(label === "undefined" || label === ""){
+                  throw "Invalid label";
+                }
+              } catch(e){
+                label = "Unnamed graph";
+              }
+              const name = String(i+1) + ": " + label;
+              optionList.push(name);
+              valueList.push(String(i));
+            }
+            ui.composites.selection(ui.elements.graphSelection, optionList, valueList);
+          }
+          // General (menu item)
+          ui.composites.menu.setItem(ui.elements.generalHead, ui.elements.generalBody, true);
+          // Data selection (menu item)
+          ui.composites.menu.setItem(ui.elements.dataHead, ui.elements.dataBody, false);
+          // - Node size
+          ui.elements.nodeSizeNormalizationCheckbox.checked = state.useNodeSizeNormalization;
+          ui.elements.nodeSizeNormalizationContainer.style.display = ui.convert.boolToDisplayStyle(state.useNodeSizeNormalization);
+          ui.elements.nodeSizeNormalizationMinText.innerHTML = ui.convert.numberToText(state.nodeSizeNormalizationMin);
+          ui.elements.nodeSizeNormalizationMinSlider.value = state.nodeSizeNormalizationMin;
+          ui.elements.nodeSizeNormalizationMaxText.innerHTML = ui.convert.numberToText(state.nodeSizeNormalizationMax);
+          ui.elements.nodeSizeNormalizationMaxSlider.value = state.nodeSizeNormalizationMax;
+          // - Edge size
+          ui.elements.edgeSizeNormalizationCheckbox.checked = state.useEdgeSizeNormalization;
+          ui.elements.edgeSizeNormalizationContainer.style.display = ui.convert.boolToDisplayStyle(state.useEdgeSizeNormalization);
+          ui.elements.edgeSizeNormalizationMinText.innerHTML = ui.convert.numberToText(state.edgeSizeNormalizationMin);
+          ui.elements.edgeSizeNormalizationMinSlider.value = state.edgeSizeNormalizationMin;
+          ui.elements.edgeSizeNormalizationMaxText.innerHTML = ui.convert.numberToText(state.edgeSizeNormalizationMax);
+          ui.elements.edgeSizeNormalizationMaxSlider.value = state.edgeSizeNormalizationMax;
+          // Nodes
+          ui.composites.menu.setItem(ui.elements.nodeHead, ui.elements.nodeBody, false);
+          ui.elements.nodeCheckbox.checked = state.showNodes;
+          ui.elements.nodeSizeFactorText.innerHTML = ui.convert.numberToText(state.nodeSizeFactor);
+          ui.elements.nodeSizeFactorSlider.value = state.nodeSizeFactor;
+          ui.elements.nodeDragFixCheckbox.checked = state.nodeDragFix;
+          ui.elements.nodeHoverTooltipCheckbox.checked = state.nodeHoverTooltip;
+          // Node images
+          ui.composites.menu.setItem(ui.elements.nodeImageHead, ui.elements.nodeImageBody, false);
+          ui.elements.nodeImageMetaControl.style.display = false;
+          ui.elements.nodeImageCheckbox.checked = state.showNodeImages;
+          ui.elements.nodeImageSizeFactorText.innerHTML = ui.convert.numberToText(state.nodeImageSizeFactor);
+          ui.elements.nodeImageSizeFactorSlider.value = state.nodeImageSizeFactor;
+          // Node labels
+          ui.composites.menu.setItem(ui.elements.nodeLabelHead, ui.elements.nodeLabelBody, false);
+          ui.elements.nodeLabelCheckbox.checked = state.showNodeLabels;
+          ui.elements.nodeLabelBorderCheckbox.checked = state.showNodeLabelBorders;
+          ui.elements.nodeLabelSizeFactorText.innerHTML = ui.convert.numberToText(state.nodeLabelSizeFactor);
+          ui.elements.nodeLabelSizeFactorSlider.value = state.nodeLabelSizeFactor;
+          // Edges
+          ui.composites.menu.setItem(ui.elements.edgeHead, ui.elements.edgeBody, false);
+          ui.elements.edgeCheckbox.checked = state.showEdges;
+          ui.elements.edgeSizeFactorText.innerHTML = ui.convert.numberToText(state.edgeSizeFactor);
+          ui.elements.edgeSizeFactorSlider.value = state.edgeSizeFactor;
+          ui.elements.edgeCurvatureText.innerHTML = ui.convert.numberToText(state.edgeCurvature);
+          ui.elements.edgeCurvatureSlider.value = state.edgeCurvature;
+          ui.elements.edgeHoverTooltipCheckbox.checked = state.edgeHoverTooltip;
+          // Layout algorithm
+          ui.composites.menu.setItem(ui.elements.layoutAlgorithmHead, ui.elements.layoutAlgorithmBody, false);
+          ui.elements.simulationCheckbox.checked = state.layoutAlgorithmActive;
+          ui.elements.manyBodyForceCheckbox.checked = state.useManyBodyForce;
+          ui.elements.manyBodyForceContainer.style.opacity = ui.convert.boolToOpacity(state.useManyBodyForce);
+          ui.elements.manyBodyForceStrengthText.innerHTML = ui.convert.numberToText(state.manyBodyForceStrength);
+          ui.elements.manyBodyForceStrengthSlider.value = state.manyBodyForceStrength;
+          ui.elements.manyBodyForceThetaText.innerHTML = ui.convert.numberToText(state.manyBodyForceTheta);
+          ui.elements.manyBodyForceThetaSlider.value = state.manyBodyForceTheta;
+          ui.elements.manyBodyForceMinDistCheckbox.checked = state.useManyBodyForceMinDistance;
+          ui.elements.manyBodyForceMinDistContainer.style.opacity = ui.convert.boolToOpacity(state.useManyBodyForceMinDistance);
+          ui.elements.manyBodyForceMinDistText.innerHTML = ui.convert.numberToText(state.manyBodyForceMinDistance);
+          ui.elements.manyBodyForceMinDistSlider.value = state.manyBodyForceMinDistance;
+          ui.elements.manyBodyForceMaxDistCheckbox.checked = state.useManyBodyForceMaxDistance;
+          ui.elements.manyBodyForceMaxDistContainer.style.opacity = ui.convert.boolToOpacity(state.useManyBodyForceMaxDistance);
+          ui.elements.manyBodyForceMaxDistText.innerHTML = ui.convert.numberToText(state.manyBodyForceMaxDistance);
+          ui.elements.manyBodyForceMaxDistSlider.value = state.manyBodyForceMaxDistance;
+          ui.elements.linksForceCheckbox.checked = state.useLinksForce;
+          ui.elements.linksForceContainer.style.opacity = ui.convert.boolToOpacity(state.useLinksForce);
+          ui.elements.linksForceDistanceText.innerHTML = ui.convert.numberToText(state.linksForceDistance);
+          ui.elements.linksForceDistanceSlider.value = state.linksForceDistance;
+          ui.elements.linksForceStrengthText.innerHTML = ui.convert.numberToText(state.linksForceStrength);
+          ui.elements.linksForceStrengthSlider.value = state.linksForceStrength;
+          ui.elements.xPositioningForceCheckbox.checked = state.useXPositioningForce;
+          ui.elements.xPositioningForceContainer.style.opacity = ui.convert.boolToOpacity(state.useXPositioningForce);
+          ui.elements.xPositioningForceStrengthText.innerHTML = ui.convert.numberToText(state.xPositioningForceStrength);
+          ui.elements.xPositioningForceStrengthSlider.value = state.xPositioningForceStrength;
+          ui.elements.yPositioningForceCheckbox.checked = state.useYPositioningForce;
+          ui.elements.yPositioningForceContainer.style.opacity = ui.convert.boolToOpacity(state.useYPositioningForce);
+          ui.elements.yPositioningForceStrengthText.innerHTML = ui.convert.numberToText(state.yPositioningForceStrength);
+          ui.elements.yPositioningForceStrengthSlider.value = state.yPositioningForceStrength;
+          ui.elements.zPositioningForceCheckbox.checked = state.useZPositioningForce;
+          ui.elements.zPositioningForceContainer.style.opacity = ui.convert.boolToOpacity(state.useZPositioningForce);
+          ui.elements.zPositioningForceStrengthText.innerHTML = ui.convert.numberToText(state.zPositioningForceStrength);
+          ui.elements.zPositioningForceStrengthSlider.value = state.zPositioningForceStrength;
+          ui.elements.centeringForceCheckbox.checked = state.useCenteringForce;
+
+          ui.initSelectionValues();
+        },
+
+        initSelectionValues(){
+          function setSelectionOptionsAndValue(element, options, value){
+            if(!options.includes(value)){
+              value = options[0];
+            }
+            ui.composites.selection(element, options);
+            element.value = value;
+          }
+          // Node label text data source
+          setSelectionOptionsAndValue(
+            ui.elements.nodeLabelTextDataSourceSelect,
+            state.parsedData.general.node_properties.node_label_text_data_sources,
+            state.nodeLabelTextDataSource,
+          );
+          // Node size data source
+          setSelectionOptionsAndValue(
+            ui.elements.nodeSizeDataSourceSelect,
+            state.parsedData.general.node_properties.node_size_data_sources,
+            state.nodeSizeDataSource,
+          );
+          // Edge size data source
+          setSelectionOptionsAndValue(
+            ui.elements.edgeSizeDataSourceSelect,
+            state.parsedData.general.edge_properties.edge_size_data_sources,
+            state.edgeSizeDataSource,
+          );
+        },
+
+        deleteChildElements(element){
+          while(element.firstChild){
+            element.removeChild(element.firstChild);
+          }
+        },
+
+        convert:{
+          numberToText(number, numDigits=2) {
+            return String(Number(number).toFixed(numDigits));
+          },
+
+          boolToDisplayStyle(isVisible){
+            if(isVisible){
+              return "block";
+            }
+            return "none";
+          },
+
+          boolToOpacity(isActive){
+            if(isActive){
+              return 1.0;
+            }
+            return 0.25;
+          },
+        },
+
+        setBehavior(){
+          // Window resize (includes ctrl+wheel zoom, landscape/portrait orientation on phones)
+          window.onresize = function(){
+            ui.composites.responsiveContainer.adaptToResize();
+            ui.composites.graph.updateGraphDrawingArea();
+          }
+          // Container resize
+          ui.elements.graphContainer.onmouseup = function(){
+            const currentHeight = parseInt(ui.elements.graphContainer.clientHeight);
+            if(currentHeight != state.graphContainerHeight){
+              ui.composites.responsiveContainer.adaptToResize();
+              ui.composites.graph.updateGraphDrawingArea();
+            }
+          };
+          ui.elements.detailsContainer.onmouseup = function(){
+            const currentHeight = parseInt(ui.elements.detailsContainer.clientHeight);
+            if(currentHeight != state.detailsContainerHeight){
+              ui.composites.responsiveContainer.adaptToResize();
+            }
+          };
+          // Tooltip
+          ui.elements.tooltipContainer.onmouseover = function(){
+            ui.composites.tooltip.show();
+          }
+          ui.elements.tooltipContainer.onmouseout = function(){
+            ui.composites.tooltip.hide();
+          }
+          // General menu
+          ui.elements.generalHead.onclick = function(){
+            ui.composites.menu.toggleItem(ui.elements.generalHead, ui.elements.generalBody);
+          };
+          ui.elements.resetButton.onclick = function(){
+            app.restart();
+          };
+          ui.elements.fullscreenButton.onclick = function(){
+            if(document.fullscreenElement){
+              document.exitFullscreen();
+            } else{
+              ui.elements.mainContainer.requestFullscreen()
+                .catch(function(err){
+                  alert("Error attempting to enable full-screen mode: " + err.message);
+                });
+            }
+          };
+          ui.elements.mainContainer.onfullscreenchange = function(){
+            if(document.fullscreenElement){
+              ui.elements.fullscreenButton.innerText = "Exit full screen";
+            } else{
+              ui.elements.fullscreenButton.innerText = "Enter full screen";
+            }
+            // Wait for browser to switch to fullscreen and resize divs, then adapt to new sizes
+            setTimeout(function(){
+              ui.composites.responsiveContainer.adaptToFullscreen();
+              ui.composites.graph.updateGraphDrawingArea();
+            }, 250);
+          };
+          ui.elements.pngExportButton.onclick = function(){
+            ui.composites.download.png("graph.png");
+          };
+          ui.elements.jpgExportButton.onclick = function(){
+            ui.composites.download.jpg("graph.jpg");
+          };
+          // Data menu
+          ui.elements.dataHead.onclick = function(){
+            ui.composites.menu.toggleItem(ui.elements.dataHead, ui.elements.dataBody);
+          };
+          // - Graph selection
+          ui.elements.graphSelection.onchange = function(){
+            const chosenGraphIndex = parseInt(this.value);
+            state.manager.parseChosenData(chosenGraphIndex);
+            state.manager.prepareShownData();
+            ui.initSelectionValues();
+            ui.composites.graph.createGraph();
+          };
+          // - Node label text
+          ui.elements.nodeLabelTextDataSourceSelect.onchange = function(){
+            state.nodeLabelTextDataSource = this.value;
+            state.manager.updateNodeLabelTexts();
+          };
+          // - Node size
+          ui.elements.nodeSizeDataSourceSelect.onchange = function(){
+            state.nodeSizeDataSource = this.value;
+            state.manager.updateNodeSizes();
+          };
+          ui.elements.nodeSizeNormalizationCheckbox.onchange = function(){
+            state.useNodeSizeNormalization = this.checked;
+            ui.elements.nodeSizeNormalizationContainer.style.display = ui.convert.boolToDisplayStyle(state.useNodeSizeNormalization);
+            state.manager.updateNodeSizes();
+          };
+          ui.elements.nodeSizeNormalizationMinSlider.oninput = function(){
+            ui.elements.nodeSizeNormalizationMinText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.nodeSizeNormalizationMinSlider.onchange = function(){
+            state.nodeSizeNormalizationMin = parseFloat(this.value);
+            if(state.nodeSizeNormalizationMin > state.nodeSizeNormalizationMax){
+              state.nodeSizeNormalizationMax = state.nodeSizeNormalizationMin;
+              ui.elements.nodeSizeNormalizationMaxSlider.value = state.nodeSizeNormalizationMax;
+              ui.elements.nodeSizeNormalizationMaxText.innerHTML = ui.convert.numberToText(state.nodeSizeNormalizationMax);
+            }
+            state.manager.updateNodeSizes();
+          };
+          ui.elements.nodeSizeNormalizationMaxSlider.oninput = function(){
+            ui.elements.nodeSizeNormalizationMaxText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.nodeSizeNormalizationMaxSlider.onchange = function(){
+            state.nodeSizeNormalizationMax = parseFloat(this.value);
+            if(state.nodeSizeNormalizationMax < state.nodeSizeNormalizationMin){
+              state.nodeSizeNormalizationMin = state.nodeSizeNormalizationMax;
+              ui.elements.nodeSizeNormalizationMinSlider.value = state.nodeSizeNormalizationMin;
+              ui.elements.nodeSizeNormalizationMinText.innerHTML = ui.convert.numberToText(state.nodeSizeNormalizationMin);
+            }
+            state.manager.updateNodeSizes();
+          };
+          // - Edge size
+          ui.elements.edgeSizeDataSourceSelect.onchange = function(){
+            state.edgeSizeDataSource = this.value;
+            state.manager.updateEdgeSizes();
+          };
+          ui.elements.edgeSizeNormalizationCheckbox.onchange = function(){
+            state.useEdgeSizeNormalization = this.checked;
+            ui.elements.edgeSizeNormalizationContainer.style.display = ui.convert.boolToDisplayStyle(state.useEdgeSizeNormalization);
+            state.manager.updateEdgeSizes();
+          };
+          ui.elements.edgeSizeNormalizationMinSlider.oninput = function(){
+            ui.elements.edgeSizeNormalizationMinText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.edgeSizeNormalizationMinSlider.onchange = function(){
+            state.edgeSizeNormalizationMin = parseFloat(this.value);
+            if(state.edgeSizeNormalizationMin > state.edgeSizeNormalizationMax){
+              state.edgeSizeNormalizationMax = state.edgeSizeNormalizationMin;
+              ui.elements.edgeSizeNormalizationMaxSlider.value = state.edgeSizeNormalizationMax;
+              ui.elements.edgeSizeNormalizationMaxText.innerHTML = ui.convert.numberToText(state.edgeSizeNormalizationMax);
+            }
+            state.manager.updateEdgeSizes();
+          };
+          ui.elements.edgeSizeNormalizationMaxSlider.oninput = function(){
+            ui.elements.edgeSizeNormalizationMaxText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.edgeSizeNormalizationMaxSlider.onchange = function(){
+            state.edgeSizeNormalizationMax = parseFloat(this.value);
+            if(state.edgeSizeNormalizationMax < state.edgeSizeNormalizationMin){
+              state.edgeSizeNormalizationMin = state.edgeSizeNormalizationMax;
+              ui.elements.edgeSizeNormalizationMinSlider.value = state.edgeSizeNormalizationMin;
+              ui.elements.edgeSizeNormalizationMinText.innerHTML = ui.convert.numberToText(state.edgeSizeNormalizationMin);
+            }
+            state.manager.updateEdgeSizes();
+          };
+          // Nodes menu
+          ui.elements.nodeHead.onclick = function(){
+            ui.composites.menu.toggleItem(ui.elements.nodeHead, ui.elements.nodeBody);
+          };
+          ui.elements.nodeCheckbox.onchange = function(){
+            state.showNodes = this.checked;
+            ui.composites.graph.updateNodeVisibilities();
+          };
+          ui.elements.nodeSizeFactorSlider.oninput = function(){
+            ui.elements.nodeSizeFactorText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.nodeSizeFactorSlider.onchange = function(){
+            state.nodeSizeFactor = parseFloat(this.value);
+            state.manager.updateNodeSizes();
+          };
+          ui.elements.nodeDragFixCheckbox.onchange = function(){
+            state.nodeDragFix = this.checked;
+          };
+          ui.elements.nodeHoverTooltipCheckbox.onchange = function(){
+            state.nodeHoverTooltip = this.checked;
+          };
+          ui.elements.nodeReleaseButton.onclick = function(){
+            ui.composites.graph.simulationManager.releaseFixedNodes();
+            ui.composites.graph.simulationManager.move();
+          };
+          // Node images menu
+          ui.elements.nodeImageHead.onclick = function(){
+            ui.composites.menu.toggleItem(ui.elements.nodeImageHead, ui.elements.nodeImageBody);
+          };
+          ui.elements.nodeImageCheckbox.onchange = function(){
+            state.showNodeImages = this.checked;
+            ui.composites.graph.updateNodeImages();
+          };
+          ui.elements.nodeImageSizeFactorSlider.oninput = function(){
+            ui.elements.nodeImageSizeFactorText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.nodeImageSizeFactorSlider.onchange = function(){
+            state.nodeImageSizeFactor = parseFloat(this.value);
+            state.manager.updateNodeImageSizes();
+          };
+          // Node labels menu
+          ui.elements.nodeLabelHead.onclick = function(){
+            ui.composites.menu.toggleItem(ui.elements.nodeLabelHead, ui.elements.nodeLabelBody);
+          };
+          ui.elements.nodeLabelCheckbox.onchange = function(){
+            state.showNodeLabels = this.checked;
+            ui.composites.graph.updateNodeLabels();
+          };
+          ui.elements.nodeLabelBorderCheckbox.onchange = function(){
+            state.showNodeLabelBorders = this.checked;
+            ui.composites.graph.updateNodeLabels();
+          };
+          ui.elements.nodeLabelSizeFactorSlider.oninput = function(){
+            ui.elements.nodeLabelSizeFactorText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.nodeLabelSizeFactorSlider.onchange = function(){
+            state.nodeLabelSizeFactor = parseFloat(this.value);
+            state.manager.updateNodeLabelSizes();
+          };
+          // Edges menu
+          ui.elements.edgeHead.onclick = function(){
+            ui.composites.menu.toggleItem(ui.elements.edgeHead, ui.elements.edgeBody);
+          };
+          ui.elements.edgeCheckbox.onchange = function(){
+            state.showEdges = this.checked;
+            ui.composites.graph.updateEdgeVisibilities();
+          };
+          ui.elements.edgeSizeFactorSlider.oninput = function(){
+            ui.elements.edgeSizeFactorText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.edgeSizeFactorSlider.onchange = function(){
+            state.edgeSizeFactor = parseFloat(this.value);
+            state.manager.updateEdgeSizes();
+          };
+          ui.elements.edgeCurvatureSlider.oninput = function(){
+            ui.elements.edgeCurvatureText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.edgeCurvatureSlider.onchange = function(){
+            state.edgeCurvature = parseFloat(this.value);
+            state.manager.updateEdgeCurvatures();
+          };
+          ui.elements.edgeHoverTooltipCheckbox.onchange = function(){
+            state.edgeHoverTooltip = this.checked;
+          };
+          // Layout algorithm menu
+          ui.elements.layoutAlgorithmHead.onclick = function(){
+            ui.composites.menu.toggleItem(ui.elements.layoutAlgorithmHead, ui.elements.layoutAlgorithmBody);
+          };
+          ui.elements.simulationCheckbox.onchange = function(){
+            state.layoutAlgorithmActive = !state.layoutAlgorithmActive;
+            if(state.layoutAlgorithmActive){
+              ui.composites.graph.simulationManager.restart();
+            } else {
+              ui.composites.graph.simulationManager.stop();
+            }
+          }
+          ui.elements.manyBodyForceCheckbox.onchange = function(){
+            state.useManyBodyForce = this.checked;
+            ui.elements.manyBodyForceContainer.style.opacity = ui.convert.boolToOpacity(state.useManyBodyForce);
+            ui.composites.graph.simulationManager.setManyBodyForce();
+            ui.composites.graph.simulationManager.move();
+          };
+          ui.elements.manyBodyForceStrengthSlider.oninput = function(){
+            ui.elements.manyBodyForceStrengthText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.manyBodyForceStrengthSlider.onchange = function(){
+            state.manyBodyForceStrength = parseFloat(this.value);
+            ui.composites.graph.simulationManager.setManyBodyForce();
+            if(state.useManyBodyForce){
+              ui.composites.graph.simulationManager.move();
+            }
+          };
+          ui.elements.manyBodyForceThetaSlider.oninput = function(){
+            ui.elements.manyBodyForceThetaText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.manyBodyForceThetaSlider.onchange = function(){
+            state.manyBodyForceTheta = parseFloat(this.value);
+            ui.composites.graph.simulationManager.setManyBodyForce();
+            if(state.useManyBodyForce){
+              ui.composites.graph.simulationManager.move();
+            }
+          };
+          ui.elements.manyBodyForceMinDistCheckbox.onchange = function(){
+            state.useManyBodyForceMinDistance = this.checked;
+            ui.composites.graph.simulationManager.setManyBodyForce();
+            ui.elements.manyBodyForceMinDistContainer.style.opacity = ui.convert.boolToOpacity(state.useManyBodyForceMinDistance);
+          }
+          ui.elements.manyBodyForceMinDistSlider.oninput = function(){
+            ui.elements.manyBodyForceMinDistText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.manyBodyForceMinDistSlider.onchange = function(){
+            state.manyBodyForceMinDistance = parseFloat(this.value);
+            if(state.manyBodyForceMinDistance > state.manyBodyForceMaxDistance){
+              state.manyBodyForceMaxDistance = state.manyBodyForceMinDistance;
+              ui.elements.manyBodyForceMaxDistText.innerHTML = ui.convert.numberToText(state.manyBodyForceMaxDistance);
+              ui.elements.manyBodyForceMaxDistSlider.value = state.manyBodyForceMaxDistance;
+            }
+            ui.composites.graph.simulationManager.setManyBodyForce();
+            if(state.useManyBodyForce){
+              ui.composites.graph.simulationManager.move();
+            }
+          };
+          ui.elements.manyBodyForceMaxDistCheckbox.onchange = function(){
+            state.useManyBodyForceMaxDistance = this.checked;
+            ui.composites.graph.simulationManager.setManyBodyForce();
+            ui.elements.manyBodyForceMaxDistContainer.style.opacity = ui.convert.boolToOpacity(state.useManyBodyForceMaxDistance);
+          }
+          ui.elements.manyBodyForceMaxDistSlider.oninput = function(){
+            ui.elements.manyBodyForceMaxDistText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.manyBodyForceMaxDistSlider.onchange = function(){
+            state.manyBodyForceMaxDistance = parseFloat(this.value);
+            if(state.manyBodyForceMaxDistance < state.manyBodyForceMinDistance){
+              state.manyBodyForceMinDistance = state.manyBodyForceMaxDistance;
+              ui.elements.manyBodyForceMinDistText.innerHTML = ui.convert.numberToText(state.manyBodyForceMinDistance);
+              ui.elements.manyBodyForceMinDistSlider.value = state.manyBodyForceMinDistance;
+            }
+            ui.composites.graph.simulationManager.setManyBodyForce();
+            if(state.useManyBodyForce){
+              ui.composites.graph.simulationManager.move();
+            }
+          };
+          ui.elements.linksForceCheckbox.onchange = function(){
+            state.useLinksForce = this.checked;
+            ui.elements.linksForceContainer.style.opacity = ui.convert.boolToOpacity(state.useLinksForce);
+            ui.composites.graph.simulationManager.setLinksForce();
+            ui.composites.graph.simulationManager.move();
+          };
+          ui.elements.linksForceDistanceSlider.oninput = function(){
+            ui.elements.linksForceDistanceText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.linksForceDistanceSlider.onchange = function(){
+            state.linksForceDistance = parseFloat(this.value);
+            ui.composites.graph.simulationManager.setLinksForce();
+            if(state.useLinksForce){
+              ui.composites.graph.simulationManager.move();
+            }
+          };
+          ui.elements.linksForceStrengthSlider.oninput = function(){
+            ui.elements.linksForceStrengthText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.linksForceStrengthSlider.onchange = function(){
+            state.linksForceStrength = parseFloat(this.value);
+            ui.composites.graph.simulationManager.setLinksForce();
+            if(state.useLinksForce){
+              ui.composites.graph.simulationManager.move();
+            }
+          };
+          ui.elements.xPositioningForceCheckbox.onchange = function(){
+            state.useXPositioningForce = this.checked;
+            ui.elements.xPositioningForceContainer.style.opacity = ui.convert.boolToOpacity(state.useXPositioningForce);
+            ui.composites.graph.simulationManager.setXPositioningForce();
+            ui.composites.graph.simulationManager.move();
+          };
+          ui.elements.xPositioningForceStrengthSlider.oninput = function(){
+            ui.elements.xPositioningForceStrengthText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.xPositioningForceStrengthSlider.onchange = function(){
+            state.xPositioningForceStrength = parseFloat(this.value);
+            ui.composites.graph.simulationManager.setXPositioningForce();
+            if(state.useXPositioningForce){
+              ui.composites.graph.simulationManager.move();
+            }
+          };
+          ui.elements.yPositioningForceCheckbox.onchange = function(){
+            state.useYPositioningForce = this.checked;
+            ui.elements.yPositioningForceContainer.style.opacity = ui.convert.boolToOpacity(state.useYPositioningForce);
+            ui.composites.graph.simulationManager.setYPositioningForce();
+            ui.composites.graph.simulationManager.move();
+          };
+          ui.elements.yPositioningForceStrengthSlider.oninput = function(){
+            ui.elements.yPositioningForceStrengthText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.yPositioningForceStrengthSlider.onchange = function(){
+            state.yPositioningForceStrength = parseFloat(this.value);
+            ui.composites.graph.simulationManager.setYPositioningForce();
+            if(state.useYPositioningForce){
+              ui.composites.graph.simulationManager.move();
+            }
+          };
+          ui.elements.zPositioningForceCheckbox.onchange = function(){
+            state.useZPositioningForce = this.checked;
+            ui.elements.zPositioningForceContainer.style.opacity = ui.convert.boolToOpacity(state.useZPositioningForce);
+            ui.composites.graph.simulationManager.setZPositioningForce();
+            ui.composites.graph.simulationManager.move();
+          };
+          ui.elements.zPositioningForceStrengthSlider.oninput = function(){
+            ui.elements.zPositioningForceStrengthText.innerHTML = ui.convert.numberToText(this.value);
+          };
+          ui.elements.zPositioningForceStrengthSlider.onchange = function(){
+            state.yPositioningForceStrength = parseFloat(this.value);
+            ui.composites.graph.simulationManager.setZPositioningForce();
+            if(state.useZPositioningForce){
+              ui.composites.graph.simulationManager.move();
+            }
+          };
+          ui.elements.centeringForceCheckbox.onchange = function(){
+            state.useCenteringForce = this.checked;
+            ui.composites.graph.simulationManager.setCenteringForce();
+            ui.composites.graph.simulationManager.move();
+          };
+        },
+      }
+
+      const app = {
+        start(){
+          state.manager.fetchRawDataFromTemplating();
+          state.manager.parseChosenData(0);
+          state.manager.prepareShownData();
+          ui.init();
+          // Wait a bit to finish UI rendering, then start potentially slow layout computation
+          setTimeout(function(){
+            ui.composites.graph.createGraph();
+            ui.setBehavior();
+          }, 800);
+          // Reduce risk of getting stuck with a wrong drawing area size
+          function checkIfSizeUpdateRequired(){
+            if(ui.elements.graphContainer.clientWidth != state.graphContainerWidth){
+              ui.composites.responsiveContainer.adaptToResize();
+              ui.composites.graph.updateGraphDrawingArea();
+            }
+          }
+          [1, 2, 5, 8, 12, 15, 20, 25, 30, 35, 40, 45, 50, 60, 90].forEach(function(delay){
+            setTimeout(checkIfSizeUpdateRequired, delay*1000);
+          })
+        },
+
+        restart(){
+          ui.composites.graph.simulationManager.stop();
+          app.start();
+        },
+      }
+
+      // Start website dynamics
+      window.addEventListener("unload", function(){
+        state.threeObjects.disposeAll();
+      });
+      app.start();
+    });
+  </script>
+§SUFFIX§

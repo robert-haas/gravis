@@ -1,0 +1,15 @@
+# Inclusion of specific files
+include LICENSE
+include THIRD_PARTY
+include README.rst
+
+# Exclusion of file patterns
+global-exclude build
+global-exclude .git
+global-exclude .ipynb_checkpoints
+global-exclude *.py[cod]
+global-exclude __pycache__
+global-exclude *~
+
+# Inclusion of entire directories
+graft gravis

@@ -1,0 +1,95 @@
+{
+  "graph": {
+    "nodes": [
+      {
+        "id": "0",
+        "label": "first node",
+        "metadata": {
+          "color": "red",
+          "size": 15,
+          "shape": "rectangle",
+          "opacity": 0.7,
+          "label_color": "red",
+          "label_size": 20,
+          "border_color": "black",
+          "border_size": 3
+        }
+      },
+      {
+        "id": "3",
+        "metadata": {
+          "color": "green",
+          "size": 15,
+          "shape": "hexagon",
+          "opacity": 0.7,
+          "label_color": "green",
+          "label_size": 10,
+          "border_color": "blue",
+          "border_size": 3
+        }
+      },
+      {
+        "id": "6",
+        "label": "last node"
+      },
+      {
+        "id": "1"
+      },
+      {
+        "id": "2"
+      },
+      {
+        "id": "4"
+      },
+      {
+        "id": "5"
+      }
+    ],
+    "edges": [
+      {
+        "source": "0",
+        "target": "1"
+      },
+      {
+        "source": "3",
+        "target": "4"
+      },
+      {
+        "source": "6",
+        "target": "2",
+        "label": "e7"
+      },
+      {
+        "source": "1",
+        "target": "2",
+        "label": "e2"
+      },
+      {
+        "source": "2",
+        "target": "3"
+      },
+      {
+        "source": "4",
+        "target": "5",
+        "label": "e5",
+        "metadata": {
+          "color": "orange",
+          "label_color": "gray",
+          "label_size": 14,
+          "size": 4.0
+        }
+      },
+      {
+        "source": "5",
+        "target": "6"
+      }
+    ],
+    "directed": true,
+    "metadata": {
+      "node_label_size": 14,
+      "node_label_color": "green",
+      "edge_label_size": 10,
+      "edge_label_color": "blue"
+    }
+  }
+}

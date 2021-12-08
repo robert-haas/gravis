@@ -1,0 +1,152 @@
+*Vertices 50
+1  "1" ic Red fos 10
+2  "2" ic Red fos 10
+3  "3" ic Red fos 10
+4  "4" ic Red fos 10
+5  "5" ic Red fos 10
+6  "6" ic Red fos 10
+7  "7" ic Red fos 10
+8  "8" ic Red fos 10
+9  "9" ic Red fos 10
+10  "10" ic Red fos 10
+11  "11" ic Red fos 10
+12  "12" ic Red fos 10
+13  "13" ic Red fos 10
+14  "14" ic Red fos 10
+15  "15" ic Red fos 10
+16  "16" ic Red fos 10
+17  "17" ic Red fos 10
+18  "18" ic Red fos 10
+19  "19" ic Red fos 10
+20  "20" ic Red fos 10
+21  "21" ic Red fos 10
+22  "22" ic Red fos 10
+23  "23" ic Red fos 10
+24  "24" ic Red fos 10
+25  "25" ic Red fos 10
+26  "26" ic Red fos 10
+27  "27" ic Red fos 10
+28  "28" ic Red fos 10
+29  "29" ic Red fos 10
+30  "30" ic Red fos 10
+31  "31" ic Red fos 10
+32  "32" ic Red fos 10
+33  "33" ic Red fos 10
+34  "34" ic Red fos 10
+35  "35" ic Red fos 10
+36  "36" ic Red fos 10
+37  "37" ic Red fos 10
+38  "38" ic Red fos 10
+39  "39" ic Red fos 10
+40  "40" ic Red fos 10
+41  "41" ic Red fos 10
+42  "42" ic Red fos 10
+43  "43" ic Red fos 10
+44  "44" ic Red fos 10
+45  "45" ic Red fos 10
+46  "46" ic Red fos 10
+47  "47" ic Red fos 10
+48  "48" ic Red fos 10
+49  "49" ic Red fos 10
+50  "50" ic Red fos 10
+*Arcs 100
+1 4 1 c Black
+1 10 1 c Black
+3 23 1 c Black
+3 24 1 c Black
+3 38 1 c Black
+3 42 1 c Black
+3 45 1 c Black
+4 5 1 c Black
+4 20 1 c Black
+4 37 1 c Black
+4 44 1 c Black
+5 11 1 c Black
+5 34 1 c Black
+6 21 1 c Black
+6 27 1 c Black
+6 42 1 c Black
+6 45 1 c Black
+6 49 1 c Black
+7 29 1 c Black
+7 34 1 c Black
+8 25 1 c Black
+8 44 1 c Black
+8 48 1 c Black
+9 14 1 c Black
+9 36 1 c Black
+9 40 1 c Black
+9 49 1 c Black
+10 22 1 c Black
+10 28 1 c Black
+10 36 1 c Black
+10 38 1 c Black
+10 41 1 c Black
+10 46 1 c Black
+11 13 1 c Black
+11 14 1 c Black
+11 50 1 c Black
+12 22 1 c Black
+12 37 1 c Black
+12 48 1 c Black
+13 42 1 c Black
+13 45 1 c Black
+13 49 1 c Black
+14 24 1 c Black
+14 32 1 c Black
+15 17 1 c Black
+15 18 1 c Black
+15 40 1 c Black
+16 17 1 c Black
+16 18 1 c Black
+16 24 1 c Black
+16 29 1 c Black
+16 30 1 c Black
+16 33 1 c Black
+16 40 1 c Black
+16 41 1 c Black
+16 50 1 c Black
+17 36 1 c Black
+17 47 1 c Black
+18 19 1 c Black
+18 21 1 c Black
+19 20 1 c Black
+19 26 1 c Black
+20 36 1 c Black
+20 50 1 c Black
+21 24 1 c Black
+22 24 1 c Black
+22 35 1 c Black
+22 37 1 c Black
+22 50 1 c Black
+23 28 1 c Black
+23 43 1 c Black
+24 28 1 c Black
+24 37 1 c Black
+25 28 1 c Black
+25 46 1 c Black
+25 48 1 c Black
+26 39 1 c Black
+26 40 1 c Black
+26 41 1 c Black
+26 48 1 c Black
+27 29 1 c Black
+27 48 1 c Black
+28 43 1 c Black
+29 34 1 c Black
+29 38 1 c Black
+29 45 1 c Black
+30 39 1 c Black
+31 33 1 c Black
+33 38 1 c Black
+33 46 1 c Black
+34 41 1 c Black
+34 43 1 c Black
+38 42 1 c Black
+38 46 1 c Black
+39 41 1 c Black
+39 42 1 c Black
+39 50 1 c Black
+43 45 1 c Black
+43 49 1 c Black
+47 50 1 c Black

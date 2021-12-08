@@ -1,0 +1,12 @@
+This package reuses software from third parties with minor modifications.
+The corresponding code files can be found in the directory "third_party"
+together with their original license files, which contain permission and
+copyright notices that explicitly grant using, modifying and redistributing
+the code.
+
+Here is a short list of reused libraries and their licenses:
+- 3d-force-graph.min.js: MIT License
+- d3.min.js: ISC License
+- require.min.js: MIT License (with additional paragraphs that apply to other parts of the repository)
+- three.min.js: MIT License
+- vis-network.min.js: MIT License
