@@ -119,7 +119,7 @@ class Figure:
             _operating_system.is_file(filepath, raise_exception=True)
 
         # Transformation
-        with open(filepath, 'w') as file_handle:
+        with open(filepath, 'w', encoding="utf-8") as file_handle:
             html_text = self.to_html()
             file_handle.write(html_text)
 
